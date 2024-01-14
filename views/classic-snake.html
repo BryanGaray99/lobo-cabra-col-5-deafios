@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classic Snake</title>
+  <link rel="stylesheet" href="/css/classic-snake.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
+  <script src="/scripts/global/global.js"></script>
+  <link rel="stylesheet" href="/css/global.css">
+</head>
+
+<body onload="checkLoginStatus()">
+    <div class = "head">
+        <h2><span id="moveLeft">ARCADES</span> <span id="moveRight">ASSEMBLE</span></h2>
+    </div>
+    <ul>
+        <li><a href="/games/flappy-bird/" class="flappy-bird">Flappy Bird</a></li>
+        <li><a href="/games/game-2048/" class="game-2048">2048</a></li>
+        <li><a href="#" class="active classic-snake-game">Classic Snake</a></li>
+        <li><a href="/games/tetris/" class="tetris">Tetris</a></li>
+        <li><a href="/games/guess-the-color/" class="guess-the-color">Guess the Color!</a></li>
+        <li onclick="logout()"><a href="#" id="login-btn">Logout</a></li>
+        <li><a href="/games">Return</a></li>
+    </ul>
+    <div class="snake-game">
+        <div class="info">
+            <div class="scores">
+                <div class="score">
+                    Score
+                    <span class="score-number">0</span>
+                </div>
+                <div class="score">
+                    High Score
+                    <span class="high-score-number">0</span>
+                </div>
+            </div>
+            <div class="controls">
+            <button class="btn-start">
+                <span class="material-icons icon-play_arrow">play_arrow</span>
+            </button>
+            <button class="btn-pause" disabled>
+                <span class="material-icons icon-pause">pause</span>
+            </button>
+            <button class="btn-newGame material-icons icon-replay">replay</button>
+            <button class="btn-bgm">
+                <span class="material-icons icon-music_note">music_note</span>
+                <span class="material-icons icon-music_off hidden">music_off</span>
+            </button>
+            <button class="btn-audio">
+                <span class="material-icons icon-audio-on">volume_up</span>
+                <span class="material-icons icon-audio-off hidden">volume_off</span>
+            </button>
+            </div>
+        </div>
+
+        <div class="game-board">
+            <div class="board"></div>
+            <div id="game-over">
+            Game over!
+            <p class="restart-msg">Press R to restart</p>
+            </div>
+        </div>
+
+        <div>
+            <audio id="player" autoplay loop hidden>
+            <source src="/resources/classic-snake/sounds/amazing-plan-by-kevin-macleod-from-filmmusic-io.mp3" type="audio/mpeg" />
+            audio isn't supported.
+            </audio>
+        </div>
+
+        <div class="hard">
+            <span class="hard-span">Inverted hard mode:</span>
+            <div class="slider-box">
+            <input type="checkbox" id="switch__checkbox" />
+            <label class="switch" for="switch__checkbox">
+                <span class="slider"></span>
+            </label>
+            </div>
+            <p class="desc">Controls are now inverted!</p>
+        </div>
+    </div>
+
+    <div class="leaderboard_pop">
+        <div class="img_wrap">
+            <div class="hide">Leaderboard!</div>
+            <img id="open" onclick="getScores()" src="/resources/leaderboard/images/trophy.png" width=100% height=100% align="center" >
+        </div>
+    </div>
+    <div id="modal_container" class="modal-container">
+    <div class="modal">
+        <button id="close" class="close">&times;</button>
+        <h1 id="arcade">Arcade Assemble</h1>
+        <div class="leaderboard">
+            <div class="leaderboard-head">
+                <span id="forimage"></span>
+                <h3>Leaderboard</h3>
+            </div>
+            <div class="members-with-score">
+                <!-- Result html will be added here -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    <script src="/scripts/classic-snake/classic-snake.js"></script>
+</body>
+
+</html>
