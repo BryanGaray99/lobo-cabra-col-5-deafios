@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
 
-		<title>Sign Up</title>
+		<title>Registrarse</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/signup.css">
@@ -12,30 +12,30 @@
 	<body>
 		<div class="container">
 			<header>
-				<h1>Arcades Assemble</h1><h3>signup for fun</h3>
+				<header><h1>Lobo - Cabra - Col</h1><h2>5 Desafíos</h2><h3>Registro</h3></header>
 			</header>
 			<div id="signupForm">
 				<form id="signup-form">
-					<input id="firstName" class="firstName" type="text" name="firstName" placeholder="Enter your First Name" autocomplete="off" required><br>
-                    <input id="middleName" class="middleName" type="text" name="middleName" placeholder="Enter your Middle Name" autocomplete="off"><br>
-                    <input id="lastName" class="lastName" type="text" name="lastName" placeholder="Enter your Last Name" autocomplete="off"><br>
-                    <input id="email" class="email" type="email" name="email" placeholder="Enter your Email" autocomplete="off" required><br>
-                    <input id="ign" class="ign" type="text" name="ign" placeholder="Enter your IGN" autocomplete="off" required><br>
-					<input id="password" class="password" type="password" name="password" placeholder="Enter your Password" autocomplete="off" required><br>
-                    <input id="confirm-password" class="password" type="password" name="password" placeholder="Confirm Password" autocomplete="off" required><br>
+					<input id="firstName" class="firstName" type="text" name="firstName" placeholder="Ingresa tu Nombre" autocomplete="off" required><br>
+                    <input id="middleName" class="middleName" type="text" name="middleName" placeholder="Ingresa tu Segundo Nombre" autocomplete="off"><br>
+                    <input id="lastName" class="lastName" type="text" name="lastName" placeholder="Ingresa tu Apellido" autocomplete="off"><br>
+                    <input id="email" class="email" type="email" name="email" placeholder="Ingresa tu Correo Electrónico" autocomplete="off" required><br>
+                    <input id="ign" class="ign" type="text" name="ign" placeholder="Ingresa tu IGN" autocomplete="off" required><br>
+					<input id="password" class="password" type="password" name="password" placeholder="Ingresa tu Contraseña" autocomplete="off" required><br>
+                    <input id="confirm-password" class="password" type="password" name="password" placeholder="Confirma tu Contraseña" autocomplete="off" required><br>
 					<div class="err-message"><span id="err-message"></span></div> <br>
-                    <input id="signup" class="submit" type="submit" name="signup" value="Sign Up"><br>
+                    <input id="signup" class="submit" type="submit" name="signup" value="Registrarse"><br>
                 </form>
 			</div>
 			<div id="verify-email">
-				<span>A verification link has been sent to provided mail id.</span>
+				<span>Se ha enviado un enlace de verificación a la dirección de correo proporcionada.</span>
 			</div>
 			<div id="redirect-login">
-				<span>This page will be redirected in <span id="countDown">15 secs</span></span>
+				<span>Esta página se redirigirá en <span id="countDown">15 segundos</span></span>
 			</div>
 		</div>
         <div class="account-exists">
-            <span>Already have an account? <a href="/login">Login here</a></span>
+            <span>¿Ya tienes una cuenta? <a class="redirect" href="/login">Inicia sesión aquí</a></span>
         </div>
 		<script type="text/javascript" src="/scripts/signup/signup.js"></script>
 	</body>

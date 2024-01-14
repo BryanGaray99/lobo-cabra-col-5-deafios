@@ -1,33 +1,24 @@
 body {
-    background-image: 
-    linear-gradient(rgba(31, 28, 24, 1), rgba(252, 10, 10, 0.2)),
-    url('/resources/gamerProfile/images/gamer2-mini.jpg');
+	  background-image: url("../resources/signup/background1.png");
     background-size: cover;
     background-attachment: fixed;
     text-align: center;
     padding: 20px;
     font-family: Verdana, sans-serif;
-
 }
-h1{
-    text-transform: uppercase;
-    font-size:50px;
-    font-family: verdana;
-    color: #f5f5f5;
-    text-shadow: 1px 1px 1px rgb(47, 166, 187),
-    1px 2px 1px rgb(47, 166, 187),
-    1px 3px 1px rgb(47, 166, 187),
-    1px 4px 1px rgb(47, 166, 187),
-    1px 5px 1px rgb(47, 166, 187),
-    1px 6px 1px rgb(47, 166, 187),
-    1px 7px 1px rgb(47, 166, 187),
-    1px 8px 1px rgb(47, 166, 187),
-    1px 9px 1px rgb(47, 166, 187),
-    1px 10px 1px rgb(47, 166, 187),
-    1px 18px 6px rgba(16,16,16,0.4),
-    1px 22px 10px rgba(16,16,16,0.2),
-    1px 25px 35px rgba(16,16,16,0.2),
-    1px 30px 60px rgba(16,16,16,0.4);
+
+h2{
+  margin-top: 0px;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 46px;
+  font-weight: bold;
+  word-spacing: 16px;
+  background: rgb(6, 53, 85);
+  margin-bottom: 0px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+        animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 .exit a{
   color: white;
@@ -43,11 +34,10 @@ h1{
 }
 
 .container{
-    padding-top: 3%;
     width: 35%;
-    padding-bottom: 7%;
     position: relative;
     border-radius: 15%;
+    width: 70%;
     margin: auto; 
     text-align: center;
     max-height: 15%;
@@ -55,6 +45,7 @@ h1{
  } 
  
 .info{
+    margin-top: 15px;
     border-radius: 15%;
     position: relative;
     text-align: left;
@@ -64,25 +55,39 @@ h1{
     color: #232323;
 }
 .info p{
+    background-color: antiquewhite;
     font-size: 1.5em;
     color: whitesmoke;
-    text-transform: uppercase;
 }
 .info span{
-    font-size: 1em;
+    font-size: 1.5em;
     line-height: 1.6;
-    background: linear-gradient(to right, #ffffff, rgb(47, 166, 187));
     border-radius: 10px;
-    padding: 3px;
+    padding: 2px 10px 2px 10px;
     text-transform: capitalize;
 }
 .info #email {
   text-transform: lowercase;
+  background-color: antiquewhite;
 }
+
+.info #name {
+  background-color: antiquewhite;
+}
+
+.info #ign {
+  background-color: antiquewhite;
+}
+
+.info #stats {
+  background-color: transparent;
+  font-weight: bold;
+  padding-left: 40%;
+}
+
 .scores{
     width: 100%;
     padding-bottom: 3%;
-    height: 30%;
     position: fixed;
     right: 0;
     left: auto;
@@ -141,6 +146,7 @@ h1{
     object-fit: cover;
 }
 .image {
+    background-color: antiquewhite;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -165,19 +171,16 @@ h1{
 }
 
 .avatar{
-    -moz-animation: flip-scale-up-ver 0.5s linear both;;
-    -webkit-animation: flip-scale-up-ver 0.5s linear both;
-    animation: flip-scale-up-ver 0.5s linear both;
-    animation-delay: 1s;
-    width: 30%;
-    /* border-color: white; */
-    /* border-style: solid; */
+    background-color: antiquewhite;
+    width: 15%;
+    border-color: white; 
+    border-style: solid;
     float: left;
     border-radius: 15%;
     vertical-align: middle;
     align-self:center;
     margin: auto;
-    margin-right: 5px;
+    margin-right: 15px;
     text-align: center;
     object-fit: contain;
     justify-self: auto;
@@ -185,6 +188,7 @@ h1{
     justify-content: center;
 }
 .profileImage {
+  background-color: antiquewhite;
   object-fit: contain;
   width: 95%;
   height: 100%;
@@ -198,17 +202,14 @@ h1{
 
 /* /////profile icon/// */
 .avatar-top{
+  background-color: antiquewhite;
   width: 55px;
   height: 53px;
-  /* border-color: white;
-  border-style: solid; */
   border-radius: 15%;
-  -moz-animation: flip-scale-up-ver 0.5s linear both;;
-    -webkit-animation: flip-scale-up-ver 0.5s linear both;
-    animation: flip-scale-up-ver 0.5s linear both;
-    animation-delay: 1s;
+  margin-right: 10px;
 }
 .profileImageShort {
+  background-color: #faebd7;
   object-fit: contain;
   width: 95%;
   height: 90%;
@@ -236,7 +237,7 @@ h1{
   right: 0;
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #faebd7;
   min-width: 160px;
   text-align: left;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

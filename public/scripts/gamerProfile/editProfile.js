@@ -6,7 +6,7 @@ document.getElementById("middleName").value = user.middleName;
 document.getElementById("lastName").value = user.lastName;
 document.getElementById("email").value = user.useremail;
 
-const url = "http://www.gravatar.com/avatar/" + user.hashedEmail + "?d=monsterid";
+const url = "https://ui-avatars.com/api/?name=" + user.firstName + "+"+ user.lastName + "&background=faebd7";
 document.querySelector(".avatarimg").src = url;
 
 document.addEventListener('submit', editUserProfile);

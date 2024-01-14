@@ -1,16 +1,48 @@
+@font-face {
+  font-family: 'black_jackregular';
+  src: url('../resources/login/fonts/blackjack-webfont.eot');
+  src: url('../resources/login/fonts/blackjack-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../resources/login/fonts/blackjack-webfont.woff') format('woff'),
+       url('../resources/login/fonts/blackjack-webfont.ttf') format('truetype'),
+       url('../resources/login/fonts/blackjack-webfont.svg#black_jackregular') format('svg');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+	background-image: url("../resources/signup/background1.png");
+  height: 200px;
+  width: 200px;
+	font-family: arial;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
 .head{
-    background-color: white !important;
     text-align: -moz-center;
     font-family: 'Cinzel Decorative';
     text-align: center;
 }
+
+.head{
+  text-align: -moz-center;
+  font-family: 'Cinzel Decorative';
+  text-align: center;
+}
+
 h2{
-    font-size: 46px;
+    font-family: 'Bungee Shade', cursive;
+    font-size: 40px;
     font-weight: bold;
     word-spacing: 16px;
-    background: linear-gradient(to right,#bd3121, #1f1c18 );
+    background: rgb(6, 53, 85);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -webkit-animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .games-nav-bar{
@@ -27,10 +59,11 @@ h2{
     width: 20%;
     font-size: 25px;
     background-color: white;
-    /* margin-right: 15px; */
     border-radius: 25px;
     text-decoration: none;
     padding-top: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .game:hover{
@@ -167,10 +200,15 @@ ul{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    height: 30px;
     padding: 12px 0px 20px 15px;
-    background-color: whitesmoke;
     border-radius: 20px;
+}
+
+li{
+	background: rgb(46, 73, 112);
+	color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
 }
 
 li:first-child, li:nth-child(2){
@@ -188,23 +226,27 @@ li a{
     display: block;
     text-decoration: none;
     font-size: 30px;
-    color: #0275d8;
+    color: rgb(255, 255, 255);
 }
 
 .active{
     color: #d9534f ;
 }
 
-a:hover{
-    color: #292b2c;
+li:hover{
+	background: rgba(32, 223, 41, 0.8);
 }
+
+li:last-child:hover{
+	background: rgba(238, 21, 21, 0.8);
+}
+
 h3 {
     font-size: 30px;
     font-weight: bold;
     color: black;
-    /* background-color: #333; */
+    background-color: antiquewhite;
     letter-spacing: .1em;
-    text-shadow: 0 8px 8px rgba(78, 22, 16, 0.9);
     -webkit-animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 	        animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }

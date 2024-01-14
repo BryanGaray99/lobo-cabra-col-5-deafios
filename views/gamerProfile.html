@@ -5,28 +5,37 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Profile</title>
+        <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+        <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Cinzel Decorative">
         <link rel="stylesheet" type="text/css" href="/css/gamerProfile.css">
         <script src="/scripts/global/global.js"></script>
     </head>
     <body onload="show()">
-        <h1>Arcades Assemble</h1>
+		<h2><span id="moveLeft">Lobo - Cabra - Col:</span> <span id="moveRight">5 Desafíos</span></h2>
         <div class="dropdown">
             <div class="dropbtn">
                 <div class="avatar-top"><img src="" class="profileImageShort" width="50px" height="50px"></div>
                 <div class="dropdown-content">
-                    <a href="/editProfile">Edit Profile</a>
-                    <a href="/games">Exit</a>
+                    <a href="/editProfile">Editar Perfil</a>
+                    <a href="/games">Salir</a>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div class="avatar"><img src = "" class="profileImage" width="80%" height="90%"></div>
+            <div class="avatar"><img src = "https://ui-avatars.com/api/?name={Name}" class="profileImage" width="80%" height="90%"></div>
             <div class="info">
-                <p id="ign">IGN</p>
+                <span >Usuario:</span>
+                <span id="ign">IGN</span>
+                <br>
+                <span >Nombre:</span>
                 <span id="name">Name</span>
                 <br>
-                <span id="email">Email</span>  
-
+                <span >Correo:</span>
+                <span id="email">Email</span> 
+                <br>
+                <br>
+                <br>
+                <span id="stats">Estadísticas por nivel</span>   
             </div>
         </div>
         <div class="scores">

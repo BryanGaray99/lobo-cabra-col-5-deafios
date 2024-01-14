@@ -13,11 +13,11 @@ function show()
     // console.log(user);
     const user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user);
-    const url = "http://www.gravatar.com/avatar/" + user.hashedEmail + "?d=monsterid";
+    const url = "https://ui-avatars.com/api/?name=" + user.firstName + "+"+ user.lastName + "&background=faebd7";
     document.querySelector(".profileImage").src = url;
     document.querySelector(".profileImageShort").src = url;
     document.getElementById("ign").innerHTML = user.ign;
-    document.getElementById("name").innerHTML = user.firstName +" " + user.middleName + " "+ user.lastName;
+    document.getElementById("name").innerHTML =  user.firstName +" " + user.middleName + " "+ user.lastName;
     document.getElementById("email").innerHTML = user.useremail;
     document.getElementById("flappybird").innerHTML = user.highscore_flappy_bird;
     document.getElementById("snakegame").innerHTML = user.highscore_classic_snake;

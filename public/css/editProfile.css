@@ -1,7 +1,5 @@
 body {
-    background-image: linear-gradient(rgba(31, 28, 24, 1), rgba(252, 10, 10, 0.1)),
-      url('/resources/gamerProfile/images/gamer2-mini.jpg');
-    background-repeat: no repeat;
+  	background-image: url("../resources/signup/background1.png");
     background-size: cover;
     background-attachment: fixed;
     text-align: center;
@@ -11,12 +9,10 @@ body {
     width: 100%;
     margin: 0;
     position: absolute;
-    backdrop-filter: blur(10px);
   }
   
   h1 {
-    text-transform: uppercase;
-    color: white;
+    color: rgb(6, 53, 85);;
     font-size: 30px;
   }
   .exit a {
@@ -42,8 +38,6 @@ body {
   }
   
   .avatar {
-    -webkit-animation: flip-scale-up-ver 0.5s linear both;
-    animation: flip-scale-up-ver 0.5s linear both;
     width: 10%;
     /* border-color: white;
     border-style: solid; */
@@ -70,7 +64,7 @@ body {
   }
   .box {
     margin: 4em auto 0 auto;
-    border: 7px solid white;
+    border: 7px solid rgb(6, 53, 85);;
     border-radius: 15%;
     padding: 30px;
     width: 300px;
@@ -102,16 +96,17 @@ body {
   .submit {
     background-size: 30px 50px;
     border-radius: 5px;
-    background-color: #e7e7e7;
-    color: black;
+    background: rgb(46, 73, 112);
+    color: rgb(255, 255, 255);
     font-size: 18px;
     padding: auto;
     margin: 1.4em 0 1em 0;
     width: 150px;
     height: 40px;
+    cursor: pointer;    
   }
   .submit:hover {
-    background-color: rgb(84, 128, 128);
+    background: rgba(32, 92, 223, 0.8);
   }
   .toggle-show{
     width: 100%;

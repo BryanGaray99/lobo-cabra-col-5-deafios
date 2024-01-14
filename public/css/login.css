@@ -12,7 +12,7 @@
 
 
 body {
-	background-image: url("../resources/login/images/bg-blurred.png");
+	background-image: url("../resources/signup/background1.png");
     height: 200px;
     width: 200px;
 	font-family: arial;
@@ -41,27 +41,45 @@ a {
 .loginForm {
 	margin: 1em auto 0 auto;
 	width: 300px;
-	border: 10px solid white;
+	border: 10px solid rgba(6, 53, 85, 0.747);
+	border-radius: 15px;
 	padding: 20px;
 	width: 22.8em;
 	height: 200px;
 }
 header h1 {
-    color: rgba(240,240,240,1);
-	font-family: 'Bungee Shade', cursive;;
+    color: rgb(6, 53, 85);
+	font-family: 'Bungee Shade', cursive;
 	font-weight: bold;
-	font-size: 8em;
+	font-size: 6em;
 	font-variant: small-caps;
 	line-height: 1.5;
 	padding: 0.2em 0 0 0;
 	height: 1.5em;
 	width: 100%;
 	text-align: center;
+	-webkit-animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+header h2 {
+    color: rgb(6, 53, 85);
+	font-family: 'Bungee Shade', cursive;;
+	font-weight: bold;
+	font-size: 4em;
+	font-variant: small-caps;
+	line-height: 0.5;
+	height: 1.5em;
+	width: 100%;
+	text-align: center;
+	margin: 0.5em 0 0 0;
+	-webkit-animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	animation: track-in 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 header h3 {
-         color: rgba(240,240,240,1);
-	font-family: 'black_jackregular';
+    color: rgb(6, 53, 85);
+	font-family: 'Cinzel Decorative';
 	font-weight: bold;
 	font-size: 32px;
 	font-variant: small-caps;
@@ -78,6 +96,7 @@ input {
 	background-position: 0.5em 0.6em;
 	border: none;
 	color: rgba(80,80,80,1);
+	border-radius: 10px;
 	padding: 0 0 0 4em;
 	margin: 0 0 1em 0;
 	width: 20em;
@@ -125,10 +144,10 @@ input:focus {
 	transition: background 0.4s;
 }
 .submit:hover {
-	background: rgba(223,32,77, 0.8);
+	background: rgba(32, 223, 41, 0.8);
 }
 .submit:focus {
-	background: rgba(223,32,77, 0.8);
+	background: rgba(32, 223, 41, 0.8);
 }
 .submit1 {
 	background: rgba(35,35,35, 0.6);
@@ -142,10 +161,10 @@ input:focus {
 	transition: background 0.4s;
 }
 .submit1:hover {
-	background: rgba(223,32,77, 0.8);
+	background: rgba(32, 121, 223, 0.8);
 }
 .submit1:focus {
-	background: rgba(223,32,77, 0.8);
+	background: rgba(32, 121, 223, 0.8);
 }
 
 .err-message{
@@ -258,15 +277,40 @@ input:focus {
     box-shadow:  0 2px 4px rgba(0,0,0,0.2);
 }
 .modal-container .close {
-position: absolute;
-right:10px;
-top:20px;
-font-size: 32px;
-background: none;
-border: none;
-outline: none;
-cursor: pointer;
+	position: absolute;
+	right:10px;
+	top:20px;
+	font-size: 32px;
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
 }
 .modal-container .close:hover {
     color:#47a386;
 }
+
+@-webkit-keyframes track-in {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes track-in {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
