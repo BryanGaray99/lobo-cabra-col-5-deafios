@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #999;
+	margin-top: 0px; 
+	width: 1200px; 
+    height: 600px; 
+}
+
+#game {
+    position: relative; 
+    width: 1200px; 
+    height: 600px; 
+    margin-top: 0px; 
+    background-image: url('../resources/lccGame/images/background.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%; 
+}
+
+
+img {
+    width: 90px; 
+    position: absolute;
+}
+
+.inizia {
+	font-family: Skranji;
+	font-size: 50px;
+	color: rgb(0, 41, 255);
+	position: relative;
+	left: 47px;
+	top: 50%;
+	background-color: #ffffff;
+	padding: 10px 40px 10px 40px;
+	border-radius: 20px;
+	border: 1px solid black;
+	box-shadow: 0 0 5px black;
+}
+
+.cabra, .lobo, .col {
+	height: 100px;
+}
+
+.clicca {
+	cursor: pointer;
+}
+
+#sx, #dx {
+	margin-top: 12%;
+	width: 308px;
+	height: 308px;
+}
+
+#scores{
+	width: 308px;
+	height: 108px;
+	background: #5e949900;
+	margin-top: 130px;
+	position: relative;
+	z-index: 100;
+}
+
+#zat {
+    width: 308px;
+    height: 108px; 
+    position: absolute;
+    top: 40%;
+    background-image: url('../resources/lccGame/images/bote.png');
+    background-repeat: no-repeat;
+	background-size: 80% 80%;
+    z-index: 10;
+}
+
+#sx, #zat {
+	float: left;
+}
+
+#dx {
+	float: right;
+}
+
+#button {
+	display: none;
+	position: absolute;
+	bottom: 90px;
+	left: 40%;
+	clear: both;
+	margin: auto;
+	width: 130px;
+	background: #ffffff;
+	color: blue;
+	text-align: center;
+	padding: 10px;
+	font-family: Skranji;
+	border-radius: 20px;
+	border: 1px solid black;
+	box-shadow: 0 0 5px black;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+#dialog {
+	display: none;
+	position: absolute;
+	top: 0px;
+	width: 450px;
+	font-family: sans-serif;
+	background: rgb(255, 224, 0);
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+	z-index: 100;
+}
+

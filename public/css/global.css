@@ -1,6 +1,6 @@
 /*////leaderboard popup/////////*/
 .modal-container {
-    background-color:antiquewhite;
+	background-image: url("../resources/signup/background1.png");
     position: fixed;
     display: flex;
     align-items: center;
@@ -19,9 +19,7 @@
     z-index: 1005;
 }
 .modal {
-    background: #D3CCE3;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: antiquewhite;
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -75,10 +73,7 @@
     font-size: 13px;
     color:white;
     border-radius:10px 10px 0px 0px;
-    background:chocolate;
-    background: #FF8008;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #ba062d, #ba062d);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #ba062d, #ba062d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background:#4873cf;
     display: flex;
     justify-content: space-around;
     align-items: center;
