@@ -6,28 +6,6 @@
     <title>Nivel 1</title>
 	<link href='https://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script src="/scripts/lccGame/lccGame.js"></script>
-	<script type="text/javascript">
-		google.load("jquery", "1");
-		google.setOnLoadCallback(function() {
-			const gameWidth = 1536;
-			const gameHeight = 730;
-			space = (gameWidth - 325) / 2 - 200;
-			console.log(space);
-			lspace = space - 150;
-			$("#zat").css("margin-left", space).addClass("clicca")
-				.click(function() {
-					$(this).removeClass("clicca").off("click");
-					$(".inizia").slideUp(function() { $(this).remove(); });
-					$("#zat").animate({left: -lspace}, "slow");
-					$("#button").slideDown("slow");
-					init();
-				});
-			$("#dialog").css({"left" : (gameWidth - 465) / 2,
-			"top" : (gameHeight - 350) / 4});
-			$("#button").click(function() { parti(); });
-		});
-	</script>
     <link rel="stylesheet" href="/css/lccGame.css">
 	<link rel="stylesheet" href="/css/global.css">
 </head>

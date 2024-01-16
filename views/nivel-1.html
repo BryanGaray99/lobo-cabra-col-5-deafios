@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Teko:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link rel="stylesheet" href="/css/nivel1.css">
     <script src="/scripts/global/global.js"></script>
     <link rel="stylesheet" href="/css/global.css">
@@ -29,41 +31,24 @@
     </div>
     <div class="container">
          <div class="game-screen">
-            <div class="snake-game">
+            <div class="nivel1">
                 <div class="info">
-                    <div class="scores">
-                        <div class="score">
-                            Score
-                            <span class="score-number">0</span>
-                        </div>
-                        <div class="score">
-                            High Score
-                            <span class="high-score-number">0</span>
-                        </div>
+                    <div class="score">
+                        Movimientos:
+                        <span class="score-number">0</span>
                     </div>
-                    <div class="controls">
-                        <button class="btn-start">
-                            <span class="material-icons icon-play_arrow">play_arrow</span>
-                        </button>
-                        <button class="btn-pause" disabled>
-                            <span class="material-icons icon-pause">pause</span>
-                        </button>
-                        <button class="btn-newGame material-icons icon-replay">replay</button>
-                        <button class="btn-bgm">
-                            <span class="material-icons icon-music_note">music_note</span>
-                            <span class="material-icons icon-music_off hidden">music_off</span>
-                        </button>
+                    <div class="score">
+                        Tiempo:
+                        <span class="elapsed-time">00:00</span>
                     </div>
                 </div>
-        
-                <div class="game-board">
-                    <div class="board"></div>
-                    <div id="game-over">
-                    Game over!
-                    <p class="restart-msg">Press R to restart</p>
-                    </div>
+                <div class="controls">
+                    <button class="btn-newGame material-icons icon-replay">replay</button>
+                    <button class="btn-bgm">
+                        <span class="material-icons icon-music_note">music_note</span>
+                        <span class="material-icons icon-music_off hidden">music_off</span>
+                    </button>
                 </div>
-        
                 <div>
                     <audio id="player" autoplay loop hidden>
                     <source src="/resources/classic-snake/sounds/amazing-plan-by-kevin-macleod-from-filmmusic-io.mp3" type="audio/mpeg" />
@@ -71,7 +56,27 @@
                     </audio>
                 </div>
             </div>
-            <iframe src="/games/lccGame" frameborder="0"></iframe>
+            <div class="game-board">
+                <div id="game">
+                    <div id="dialog"></div>
+                    <div id="game">
+                        <div id="sx">
+                            <div class="cabra"></div>
+                            <div class="lobo"></div>
+                            <div class="col"></div>
+                        </div>
+                        <div id="zat">
+                            <span class="inizia">Jugar</span>
+                        </div>
+                        <div id="dx">
+                            <div class="cabra"></div>
+                            <div class="lobo"></div>
+                            <div class="col"></div>
+                        </div>
+                        <div id="move-button">Mover!</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

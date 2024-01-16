@@ -57,12 +57,18 @@ app.set('view engine', 'html');
 // Routes
 app.get('/', (req, res) => res.redirect('/login'));
 app.get('/games', (req, res) => res.render('homepage.html'));
+app.get('/games/nivel-1', (req, res) => res.render('nivel-1.html'));
+app.get('/games/nivel-2', (req, res) => res.render('nivel-2.html'));
+app.get('/games/nivel-3', (req, res) => res.render('nivel-3.html'));
+app.get('/games/nivel-4', (req, res) => res.render('nivel-4.html'));
+app.get('/games/nivel-5', (req, res) => res.render('nivel-5.html'));
+
 app.get('/games/guess-the-color', (req, res) => res.render('colorGame.html'));
 app.get('/games/tetris', (req, res) => res.render('tetris.html'));
 app.get('/games/game-2048', (req, res) => res.render('game-2048.html'));
-app.get('/games/nivel1', (req, res) => res.render('nivel1.html'));
 app.get('/games/lccGame', (req, res) => res.render('lccGame.html'));
 app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
+
 app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
 app.get('/gamerProfile', (req, res) => res.render('gamerProfile.html'));
@@ -295,11 +301,11 @@ app.get('/api/gamePlayedDuration', async (req, res) => {
 	})
 })
 
-app.post('/api/games/guess-the-color', authenticateToken, entry)
-app.post('/api/games/tetris', authenticateToken, entry)
-app.post('/api/games/game-2048', authenticateToken, entry)
-app.post('/api/games/nivel1', authenticateToken, entry)
-app.post('/api/games/classic-snake', authenticateToken, entry)
+app.post('/api/games/nivel-1', authenticateToken, entry)
+app.post('/api/games/nivel-2', authenticateToken, entry)
+app.post('/api/games/nivel-3', authenticateToken, entry)
+app.post('/api/games/nivel-4', authenticateToken, entry)
+app.post('/api/games/nivel-5', authenticateToken, entry)
 
 app.post('/api/leaderboard', authenticateToken, async (req, res) => {
 	const {gameName} = await req.body

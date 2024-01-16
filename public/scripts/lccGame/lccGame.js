@@ -1,21 +1,43 @@
+var isLoggedIn = true;
 var startTimeStamp;
 var endTimeStamp;
-var isLoggedIn = true;
-const gameName = "nivel1";
-var gameScore = 0;
+const gameName = "nivel-1";
+
+const moves = document.querySelector(".score-number");
+const etime = document.querySelector(".elapsed-time");
+
+const newGameBtn = document.querySelector(".btn-newGame");
+
+const musicOnIcon = document.querySelector(".icon-music_note");
+const musicOffIcon = document.querySelector(".icon-music_off");
+const bgMusic = document.querySelector(".btn-bgm");
+
+
+let backgroundMusicEnabled = true;
+
+var modal = document.querySelector("#myModal");
+var btn = document.querySelector(".leaderboard_pop");
+var sides = ["sx", "dx"];
+var names = ["cabra", "lobo", "col"];
+var space, lspace, turn = 0, timer, PC = true, PL = true, ZE = true; 
+
+var conta = 0;
+let timerInterval;
+
+const gameWidth = 1536;
+const gameHeight = 730;
+space = (gameWidth - 325) / 2 - 200;
+lspace = space - 150;
 
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
 
-var sides = ["sx", "dx"];
-var names = ["cabra", "lobo", "col"];
-var space, lspace, turn = 0, timer, PC = true, PL = true, ZE = true, conta = 0;
-
-
-/////leaderboard pop up///////////
 const open = document.getElementById("open");
 const modal_Container = document.getElementById("modal_container");
 const close = document.getElementById("close");
+
+// Add Event Listeners
+google.load("jquery", "1");
 
 open.addEventListener("click",() => {
     modal_Container.classList.add("show");
@@ -24,29 +46,47 @@ close.addEventListener("click",() => {
     modal_Container.classList.remove("show");
 });
 
-function logout(){
-    isLoggedIn = false;
-    userLogout();
+bgMusic.addEventListener("click", toggleMusic);
+
+newGameBtn.addEventListener('click', _ => {
+    location.reload();
+})
+
+/////// Time and moves ////////
+// Función para iniciar el temporizador
+function startTimer() {
+    startTimeStamp = new Date();
+    timerInterval = setInterval(updateTimer, 1000); // Actualiza el temporizador cada segundo
 }
 
-function checkLoginStatus(){
-    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
-    document.getElementById("login-btn").innerHTML = "Login";
-    isLoggedIn = false;
-  }
+// Función para detener el temporizador
+function stopTimer() {
+    clearInterval(timerInterval);
+    endTimeStamp = new Date();
 }
 
-const scoresList = document.getElementsByClassName("members-with-score")[0];
-
-async function getScores(){
-    if(isLoggedIn){
-        const innerhtml = await getLeaderboardScores(gameName);
-        scoresList.innerHTML = innerhtml;
-    } else {
-        scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
-    }
+// Función para actualizar el temporizador en la interfaz de usuario
+function updateTimer() {
+    const currentTime = new Date();
+    const elapsedTime = Math.floor((currentTime - startTimeStamp) / 1000);
+    
+    // Calcula horas, minutos y segundos
+    const minutes = Math.floor((elapsedTime % 3600) / 60);
+    const seconds = elapsedTime % 60;
+    
+    // Formatea las horas, minutos y segundos para que siempre tengan dos dígitos
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+    
+    // Actualiza el contenido de texto del elemento con el tiempo formateado
+    etime.textContent = `${formattedMinutes}:${formattedSeconds}`;
+}
+// Función para actualizar los movimientos en la interfaz de usuario
+function updateMoves() {
+    moves.textContent = conta; // Actualiza el número de movimientos en la interfaz de usuario
 }
 
+///////// Lógica del juego /////////
 function errore(t, tm) {
     window.clearTimeout(timer);
     $("#dialog").html(t).slideDown("fast", function() {
@@ -68,10 +108,22 @@ function restoreClick(t) {
 
 function checkVinto() {
     if ($("#sx img").length < 1 && $("#zat img").length < 2) {
+        updateMoves();
+        stopTimer();
+        endTimeStamp = new Date();
+        const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3); 
+
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
-        errore("Buen trabajo, has ganado! Y has usado " + conta + " movimientos.", 10);
-        $("#button").slideUp("fast");
+        errore("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 15);
+        $("#move-button").slideUp("fast");
+
+        if(isLoggedIn){
+            recordDurationStatistics(gameName, duration_mins);
+            var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+            addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
+        }
+        setTimeout(function(){location.reload();}, 15000);     
     }
 }
 
@@ -85,6 +137,7 @@ function parti() {
     restoreClick(turn);
     $("#zat").animate({ left: nspace }, "slow");
     conta += 1;
+    updateMoves(); 
 }
 
 function check() {
@@ -104,9 +157,6 @@ function check() {
     PL = (p == 1 && l == 1 && c == 0); // La cabra y el lobo están solos
     x = $("#zat")[0].childNodes;
     ZE = (x.length < 1);
-
-    console.log('Lado:', sides[turn], 'P:', p, 'L:', l, 'C:', c); // Registro de consola
-    console.log('PC:', PC, 'PL:', PL, 'ZE:', ZE); // Registro de consola
 }
 
 function enq(i) {
@@ -131,14 +181,80 @@ function deq(i) {
     checkVinto();
 }
 
+
+google.setOnLoadCallback(function() {
+    $("#zat").css("margin-left", space).addClass("clicca").click(function() {
+        $("#zat").removeClass("clicca").off("click");
+        $(".inizia").slideUp(function() { $(this).remove(); });
+        $("#zat").animate({left: -lspace}, "slow");
+        $("#move-button").slideDown("slow");
+        init();
+        
+    });
+    $("#move-button").click(function() { parti(); });
+});
+
+//=======Scores and music===========================================
+  
+function toggleMusic() {
+    let backgroundMusic = document.getElementById("player");
+    backgroundMusicEnabled = !backgroundMusicEnabled;
+    if (backgroundMusicEnabled) {
+      musicOnIcon.classList.remove("hidden");
+      musicOffIcon.classList.add("hidden");
+      backgroundMusic.play();
+    } else {
+      musicOnIcon.classList.add("hidden");
+      musicOffIcon.classList.remove("hidden");
+      backgroundMusic.pause();
+    }
+}
+
+function startMusic() {
+    let backgroundMusic = document.getElementById("player");
+    backgroundMusic.play();
+  }
+  
+///////// Initialization /////////
 function init() {
     for (i = 0; i < 3; i++) {
         var x = $("#sx ." + names[i]);
         x.hide();
-        for (j = 0; j < 1; j++) // Cambia a 1 elemento
-            x.append('<img src="../resources/lccGame/images/' + names[i] + '.png"/>');
+        for (j = 0; j < 1; j++) 
+            x.append('<img src="../../resources/lccGame/images/' + names[i] + '.png"/>');
         x.show("slow");
     }
     restoreClick(0);
     removeClick(1);
+    startTimeStamp = new Date();
+    startTimer();
+    updateMoves();
+}
+
+function logout(){
+  isLoggedIn = false;
+  userLogout();
+}
+
+init();
+startMusic();
+
+/////leaderboard pop up///////////
+
+function checkLoginStatus(){
+  if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+    document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
+  }
+}
+
+const scoresList = document.getElementsByClassName("members-with-score")[0];
+
+async function getScores(){
+  if(isLoggedIn){
+    const innerhtml = await getLeaderboardScores(gameName);
+    scoresList.innerHTML = innerhtml;
+  } else {
+    scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+  }
 }
