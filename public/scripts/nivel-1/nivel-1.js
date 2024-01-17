@@ -13,7 +13,8 @@ const musicOffIcon = document.querySelector(".icon-music_off");
 const bgMusic = document.querySelector(".btn-bgm");
 let backgroundMusicEnabled;
 let backgroundMusic = document.getElementById("player");
-var dialog = document.getElementById('dialog');
+var dialogLong = document.getElementById('dialog-long');
+var dialogShort = document.getElementById('dialog-short');
 var dialogDisplayedOneTime;
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
@@ -88,27 +89,28 @@ function updateMoves() {
 //////////////// Lógica del juego ////////////////////
 function errore(t, tm) {
     window.clearTimeout(timer);
-    dialog.style.lineHeight = "71px";
-    dialog.style.color = "rgb(202, 14, 14)";
-    $("#dialog").html(t).slideDown("fast", 
+    dialogLong.style.color = "rgb(202, 14, 14)";
+    dialogLong.style.lineHeight = "71px";
+    dialogLong.style.textAlign = "center";
+    $("#dialog-long").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
-            $("#dialog").slideUp("fast");
+            $("#dialog-long").slideUp("fast");
         }, tm * 1000);
     });
 }
 
 function vitoria(t, tm) {
     window.clearTimeout(timer);
-    dialog.style.lineHeight = "71px";
-    dialog.style.color = "#063555";
-    $("#dialog").html(t).slideDown("fast", 
+    dialogShort.style.color = "#063555";
+    $("#dialog-short").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
-            $("#dialog").slideUp("fast");
+            $("#dialog-short").slideUp("fast");
         }, tm * 1000);
     });
 }
+
 
 function removeClick(t) {
     $("#" + sides[t] + " img").removeClass("clicca").attr("onclick", "").unbind("click");
@@ -194,29 +196,46 @@ function check() {
         if (imageName == 'lobo.png') l = 1;
         if (imageName == 'col.png') c = 1;
     }
-    PC = (p == 1 && c == 1 && l == 0); // La cabra y la col están solas
-    PL = (p == 1 && l == 1 && c == 0); // La cabra y el lobo están solos
-    x = $("#zat")[0].childNodes;
+	PC = PC || (p == 1 && c == 1);
+	PL = PL || (p == 1 && l == 1);
+    console.log("PC: ", PC, "PL: ", PL, "ZE: ", ZE);
+    x = $("#zat")[0].children;
     ZE = (x.length < 1);
 }
 
 function enq(i) {
-    if ($("#zat")[0].childNodes.length > 2) return;
-    var x = $("#" + sides[turn] + " ." + names[i])[0].childNodes;
+    var zatNode = $("#zat")[0];
+    
+    console.log("Enq: ", zatNode.children.length);
+
+    if (zatNode.children.length > 0) return;
+
+    var x = $("#" + sides[turn] + " ." + names[i])[0].children; // Obtén solo los elementos hijos
+
     var el = x[x.length - 1];
     $(el).attr("onclick", "deq(" + i + ")").hide("fast", function () {
-        $("#zat").append($(this));
+        zatNode.appendChild($(this)[0]); // Añade el primer elemento del objeto jQuery
     });
+
     $(el).show("fast");
     check();
 }
 
 function deq(i) {
-    var el, l = $("#zat")[0].childNodes;
-    for (j = 0; j < l.length; j++) if ($(l[j]).attr("onclick") == "deq(" + i + ")") el = l[j];
+    var zatNode = $("#zat")[0];
+
+    console.log("Enq: ", zatNode.children.length);
+
+    var el, l = zatNode.children; // Obtén solo los elementos hijos
+
+    for (j = 0; j < l.length; j++) {
+        if ($(l[j]).attr("onclick") == "deq(" + i + ")") el = l[j];
+    }
+
     $(el).attr("onclick", "enq(" + i + ")").hide("fast", function () {
-        $("#" + sides[turn] + " ." + names[i]).append($(this));
+        $("#" + sides[turn] + " ." + names[i]).append($(this)[0]); // Añade el primer elemento del objeto jQuery
     });
+
     $(el).show("fast");
     check();
     checkVinto();
@@ -281,11 +300,12 @@ function startMusic() {
 
 // Función para toggle del diálogo
 function toggleHelpDialog() {
-    dialog.style.display = (dialog.style.display === 'block') ? 'none' : 'block';
-    if (dialog.style.display === 'block') {
-        dialog.style.lineHeight = "40px";
-        dialog.style.color = "#063555";
-        dialog.innerHTML =             
+    dialogLong.style.display = (dialogLong.style.display === 'block') ? 'none' : 'block';
+    if (dialogLong.style.display === 'block') {
+        dialogLong.style.lineHeight = "40px";
+        dialogLong.style.color = "#063555";
+        dialogLong.style.textAlign = "left";
+        dialogLong.innerHTML =             
             "**********************************************************************************<br>" +
             "Nivel 1 - Condiciones:<br>" +
             "•	Orilla izquierda: Lobo, Cabra, Col<br>" +
@@ -298,19 +318,20 @@ function toggleHelpDialog() {
             "Importante: Al moverte nunca dejes solos cabras con coles o lobos con cabras o perderás.<br>" +
             "**********************************************************************************<br>";
     } else {
-        dialog.innerHTML = ""; 
+        dialogLong.innerHTML = ""; 
     }
 }
 
 // Función para activar automáticamente el diálogo después de unos segundos
 function autoActivateDialog(hideAfterSeconds) {
-    dialogDisplayedOneTime = getFromLocalStorage('dialogDisplayedOneTime', false);
+    dialogDisplayedOneTime = getFromLocalStorage('dialogDisplayedOneTime-n-1', false);
 
     if (!dialogDisplayedOneTime){
-        dialog.style.display = 'block';
-        dialog.style.lineHeight = "40px";
-        dialog.style.color = "#063555";
-        dialog.innerHTML =
+        dialogLong.style.display = 'block';
+        dialogLong.style.lineHeight = "40px";
+        dialogLong.style.color = "#063555";
+        dialogLong.style.textAlign = "left";
+        dialogLong.innerHTML =
             "Me cierro en 20 segundos!<br>" +             
             "Si quieres volver a leer esto y más instrucciones da click en el botón [ (?) ]<br>" +
             "**********************************************************************************<br>" +
@@ -324,11 +345,11 @@ function autoActivateDialog(hideAfterSeconds) {
             "**********************************************************************************<br>";
     
         setTimeout(function() {
-            dialog.style.display = 'none';
-            dialog.innerHTML = ""; 
+            dialogLong.style.display = 'none';
+            dialogLong.innerHTML = ""; 
         }, hideAfterSeconds * 1000);
     } 
-    saveToLocalStorage('dialogDisplayedOneTime', true);
+    saveToLocalStorage('dialogDisplayedOneTime-n-1', true);
 }
 
 

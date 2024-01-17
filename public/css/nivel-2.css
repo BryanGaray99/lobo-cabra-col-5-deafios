@@ -12,7 +12,7 @@ html, body {
 
 /******************* * Game screen *******************/
 body h1 {
-  /*****Nivel 1 *****/
+  /*****Nivel 2 *****/
   text-align: center;
   font-family: 'Carter One', cursive;
   color: rgb(251, 176, 37);
@@ -100,7 +100,7 @@ a:hover {
 }
 
 /* ////////Controls and Info//// */
-.nivel1 {
+.nivel2 {
   margin: 60px 50px 10px 50px;
   display: flex;
   justify-content: center;
@@ -115,12 +115,12 @@ a:hover {
   left: 10%
 }
 
-.nivel1 .scores {
+.nivel2 .scores {
   color: rgba(12, 52, 181, 0.747);
   text-align: center;
 }
 
-.nivel1 .score {
+.nivel2 .score {
   font-family: "Montserrat";
   text-align: center;
   color: rgba(10, 35, 117, 0.747);
@@ -129,8 +129,8 @@ a:hover {
   font-weight: bold;
 }
 
-.nivel1 .score-number,
-.nivel1 .elapsed-time {
+.nivel2 .score-number,
+.nivel2 .elapsed-time {
   margin: 0px 8px;
 }
 
@@ -142,7 +142,7 @@ a:hover {
   right: 10%
 }
 
-.nivel1 button {
+.nivel2 button {
   height: 2rem;
   width: 6rem;
   background-color: rgba(12, 52, 181, 0.747);
@@ -155,15 +155,13 @@ a:hover {
   margin-right: 20px;
 }
 
-
-
-.nivel1 button:hover:enabled {
+.nivel2 button:hover:enabled {
   border-color: rgba(6, 53, 85, 0.747);
   background-color: #fff;
   color: rgba(6, 53, 85, 0.747);
 }
 
-.nivel1 button:disabled {
+.nivel2 button:disabled {
   color: #fff;
   background-color: #808080;
   border-color: #000000;
@@ -295,8 +293,8 @@ a:hover {
 
 
 img {
-  width: 90px; 
-  position: absolute;
+  width: 70px; 
+  position: relative;
 }
 
 .inizia {
@@ -306,7 +304,7 @@ img {
   background-color: rgba(6, 53, 85, 0.747);
   color: #fff;
   position: relative;
-	left: 47px;
+	/* left: 47px; */
 	top: 25%;
 	padding: 10px 40px 10px 40px;
 	border-radius: 20px;
@@ -315,7 +313,9 @@ img {
 }
 
 .cabra, .lobo, .col {
-	height: 100px;
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
 }
 
 .clicca {
@@ -323,7 +323,7 @@ img {
 }
 
 #sx, #dx {
-	margin-top: 12%;
+	margin-top: 15%;
 	width: 308px;
 	height: 308px;
 }
@@ -338,6 +338,12 @@ img {
 }
 
 #zat {
+  display: flex;
+	align-items: center;
+	justify-content: center; 
+  flex-wrap: nowrap; 
+  padding-left: 30px;
+
   width: 308px;
   height: 108px; 
   position: absolute;
@@ -346,6 +352,11 @@ img {
   background-repeat: no-repeat;
   background-size: 80% 80%;
   z-index: 10;
+}
+
+#zat img {
+	transform: translateX(-60px);
+	margin: 0 0.1px 0 0.1px;
 }
 
 #sx, #zat {
@@ -378,24 +389,47 @@ img {
 	cursor: pointer;
 }
 
-#dialog {
+#dialog-long {
 	display: none;
 	position: absolute;
-	top: 9%;
-  left: 4%;
-  width: 90%;
-  height: 80%;
-	font-family: sans-serif;
+  font-family: sans-serif;
+  text-align: left;
   font-weight: bold;
-	background: rgba(242, 207, 162, 0.786);
-  border-color: rgba(6, 53, 85, 0.747);
-  color: rgb(202, 14, 14);
-  border: 2px solid rgba(6, 53, 85, 0.747);
-	border-radius: 10px;
+  border-radius: 10px;
 	padding: 10px;
+  border: 2px solid rgba(6, 53, 85, 0.747);
 	font-size: 30px;
 	z-index: 100;
-  text-align: center;
+
+	top: 9%;
+  left: 4%;
+  width: 1100px;
+  height: 80%;
   line-height: 71px; 
-  overflow-wrap: break-word; 
+
+	background: rgba(255, 241, 89, 0.719);
+  border-color: rgba(6, 53, 85, 0.747);
+}
+
+#dialog-short {
+	display: none;
+	position: absolute;
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+	padding: 10px;
+  border: 2px solid rgba(6, 53, 85, 0.747);
+	font-size: 30px;
+	z-index: 100;
+
+	top: 9%;
+  left: 4%;
+  width: 1100px;
+  height: 20%;
+  line-height: 60px; 
+
+	background: rgba(255, 241, 89, 0.719);
+  border-color: rgba(6, 53, 85, 0.747);
+  color: rgb(202, 14, 14);
 }

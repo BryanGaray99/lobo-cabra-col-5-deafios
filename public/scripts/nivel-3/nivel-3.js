@@ -1,7 +1,7 @@
 var isLoggedIn = true;
 var startTimeStamp;
 var endTimeStamp;
-const gameName = "nivel-1";
+const gameName = "nivel-3";
 
 const moves = document.querySelector(".score-number");
 const etime = document.querySelector(".elapsed-time");
@@ -13,14 +13,15 @@ const musicOffIcon = document.querySelector(".icon-music_off");
 const bgMusic = document.querySelector(".btn-bgm");
 let backgroundMusicEnabled;
 let backgroundMusic = document.getElementById("player");
-var dialog = document.getElementById('dialog');
+var dialogLong = document.getElementById('dialog-long');
+var dialogShort = document.getElementById('dialog-short');
 var dialogDisplayedOneTime;
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
 
 var sides = ["sx", "dx"];
 var names = ["cabra", "lobo", "col"];
-var space, lspace, turn = 0, timer, PC = true, PL = true, ZE = true; 
+var space, lspace, rspace, turn = 0, timer, PC = true, PL = true, ZE = true; 
 
 var conta = 0;
 let timerInterval;
@@ -28,7 +29,8 @@ let timerInterval;
 const gameWidth = 1536;
 const gameHeight = 730;
 space = (gameWidth - 325) / 2 - 200;
-lspace = space - 150;
+lspace = 240 - space;
+rspace = space - 210;
 
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
@@ -38,8 +40,6 @@ const modal_Container = document.getElementById("modal_container");
 const close = document.getElementById("close");
 
 ////////////////// Add Event Listeners //////////////////
-google.load("jquery", "1");
-
 open.addEventListener("click",() => {
     modal_Container.classList.add("show");
 });
@@ -88,36 +88,47 @@ function updateMoves() {
 //////////////// Lógica del juego ////////////////////
 function errore(t, tm) {
     window.clearTimeout(timer);
-    dialog.style.lineHeight = "71px";
-    dialog.style.color = "rgb(202, 14, 14)";
-    $("#dialog").html(t).slideDown("fast", 
+    dialogLong.style.color = "rgb(202, 14, 14)";
+    dialogLong.style.textAlign = "center";
+    dialogLong.style.lineHeight = "71px";
+    $("#dialog-long").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
-            $("#dialog").slideUp("fast");
+            $("#dialog-long").slideUp("fast");
         }, tm * 1000);
     });
 }
 
 function vitoria(t, tm) {
     window.clearTimeout(timer);
-    dialog.style.lineHeight = "71px";
-    dialog.style.color = "#063555";
-    $("#dialog").html(t).slideDown("fast", 
+    dialogShort.style.color = "#063555";
+    $("#dialog-short").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
-            $("#dialog").slideUp("fast");
+            $("#dialog-short").slideUp("fast");
+        }, tm * 1000);
+    });
+}
+
+function warning(t, tm) {
+    window.clearTimeout(timer);
+    dialogShort.style.color = "rgb(202, 14, 14)";
+    $("#dialog-short").html(t).slideDown("fast", 
+    function() {
+        timer = window.setTimeout(function() {
+            $("#dialog-short").slideUp("fast");
         }, tm * 1000);
     });
 }
 
 function removeClick(t) {
-    $("#" + sides[t] + " img").removeClass("clicca").attr("onclick", "").unbind("click");
+	$("#" + sides[t] + " img").removeClass("clicca").attr("onclick", "").unbind("click");
 }
 
 function restoreClick(t) {
-    $("#" + sides[t] + " img").addClass("clicca");
-    for (i = 0; i < 3; i++)
-        $("#" + sides[t] + " ." + names[i] + " img").attr("onclick", "enq(" + i + ")");
+	$("#" + sides[t] + " img").addClass("clicca");
+	for (i=0; i<3; i++)
+		$("#" + sides[t] + " ." + names[i] + " img").attr("onclick", "enq(" + i + ")");
 }
 
 function checkVinto() {
@@ -130,7 +141,7 @@ function checkVinto() {
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 15);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 300);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -144,6 +155,7 @@ function checkVinto() {
 
 function parti() {
     check();
+	if (ZE) return warning("Debes subir al menos una figura al barco!", 4);
     if (PL) {
         errore(
             "**********************************************************************************<br>" +
@@ -172,7 +184,7 @@ function parti() {
         }, 5000); 
         return
     }; 
-    var nspace = (turn == 0) ? lspace : -lspace;
+    var nspace = (turn == 0) ? rspace : lspace;
     removeClick(turn);
     turn = 1 - turn;
     restoreClick(turn);
@@ -182,51 +194,72 @@ function parti() {
 }
 
 function check() {
-    PC = PL = ZE = false;
-    var x = $("#" + sides[turn] + " img"), p, l, c;
-    p = l = c = 0;
-    for (i = 0; i < x.length; i++) {
+	PC = PL = ZE = false;
+	var x = $("#" + sides[turn] + " img"), p, l, c;
+	p = l = c = 0;
+	for (i=0; i<x.length; i++) {
         var src = $(x[i]).attr("src");
         var parts = src.split('/');
         var imageName = parts[parts.length - 1];
 
-        if (imageName == 'cabra.png') p = 1;
-        if (imageName == 'lobo.png') l = 1;
-        if (imageName == 'col.png') c = 1;
-    }
-    PC = (p == 1 && c == 1 && l == 0); // La cabra y la col están solas
-    PL = (p == 1 && l == 1 && c == 0); // La cabra y el lobo están solos
-    x = $("#zat")[0].childNodes;
+        console.log("Image name: ",imageName);
+		if (imageName == 'cabra.png') p = 1;
+		if (imageName == 'lobo.png') l = 1;
+		if (imageName == 'col.png') c = 1;
+	}
+	PC = PC || (p == 1 && c == 1);
+	PL = PL || (p == 1 && l == 1);
+    console.log("PC: ", PC, "PL: ", PL, "ZE: ", ZE);
+
+    x = $("#zat")[0].children;
+
     ZE = (x.length < 1);
 }
 
 function enq(i) {
-    if ($("#zat")[0].childNodes.length > 2) return;
-    var x = $("#" + sides[turn] + " ." + names[i])[0].childNodes;
+    var zatNode = $("#zat")[0];
+    
+    console.log("Enq: ", zatNode.children.length);
+
+    if (zatNode.children.length > 1) return;
+
+    var x = $("#" + sides[turn] + " ." + names[i])[0].children; // Obtén solo los elementos hijos
+
     var el = x[x.length - 1];
     $(el).attr("onclick", "deq(" + i + ")").hide("fast", function () {
-        $("#zat").append($(this));
+        zatNode.appendChild($(this)[0]); // Añade el primer elemento del objeto jQuery
     });
+
     $(el).show("fast");
     check();
 }
 
 function deq(i) {
-    var el, l = $("#zat")[0].childNodes;
-    for (j = 0; j < l.length; j++) if ($(l[j]).attr("onclick") == "deq(" + i + ")") el = l[j];
+    var zatNode = $("#zat")[0];
+
+    console.log("Enq: ", zatNode.children.length);
+
+    var el, l = zatNode.children; // Obtén solo los elementos hijos
+
+    for (j = 0; j < l.length; j++) {
+        if ($(l[j]).attr("onclick") == "deq(" + i + ")") el = l[j];
+    }
+
     $(el).attr("onclick", "enq(" + i + ")").hide("fast", function () {
-        $("#" + sides[turn] + " ." + names[i]).append($(this));
+        $("#" + sides[turn] + " ." + names[i]).append($(this)[0]); // Añade el primer elemento del objeto jQuery
     });
+
     $(el).show("fast");
     check();
     checkVinto();
 }
 
+google.load("jquery", "1");
 google.setOnLoadCallback(function() {
     $("#zat").css("margin-left", space).addClass("clicca").click(function() {
         $("#zat").removeClass("clicca").off("click");
         $(".inizia").slideUp(function() { $(this).remove(); });
-        $("#zat").animate({left: -lspace}, "slow");
+        $("#zat").animate({left: lspace}, "slow");
         $("#move-button").slideDown("slow");
         init();
         
@@ -281,42 +314,44 @@ function startMusic() {
 
 // Función para toggle del diálogo
 function toggleHelpDialog() {
-    dialog.style.display = (dialog.style.display === 'block') ? 'none' : 'block';
-    if (dialog.style.display === 'block') {
-        dialog.style.lineHeight = "40px";
-        dialog.style.color = "#063555";
-        dialog.innerHTML =             
+    dialogLong.style.display = (dialogLong.style.display === 'block') ? 'none' : 'block';
+    if (dialogLong.style.display === 'block') {
+        dialogLong.style.color = "#063555";
+        dialogLong.style.lineHeight = "40px";
+        dialogLong.style.textAlign = "left";
+        dialogLong.innerHTML =             
             "**********************************************************************************<br>" +
-            "Nivel 1 - Condiciones:<br>" +
-            "•	Orilla izquierda: Lobo, Cabra, Col<br>" +
+            "Nivel 3 - Condiciones:<br>" +
+            "•  Orilla izquierda: 2 Lobos, 2 Cabras, 2 Coles<br>" +
             "•	Orilla derecha: Vacía<br>" +
-            "•	Se puede viajar sin pasajeros<br>" +
-            "•	Nro. máximo de pasajeros en el barco: 1<br>" +
+            "•	No se puede viajar solo!<br>" +
+            "•	Nro. máximo de pasajeros en el barco: 2<br>" +
             "**********************************************************************************<br>" +
             "Objetivo: Llevar a todos al lado derecho.<br>" +
             "Recuerda: Para subir o bajar un pasajero del barco dale click a su figura.<br>" +
             "Importante: Al moverte nunca dejes solos cabras con coles o lobos con cabras o perderás.<br>" +
             "**********************************************************************************<br>";
     } else {
-        dialog.innerHTML = ""; 
+        dialogLong.innerHTML = ""; 
     }
 }
 
 // Función para activar automáticamente el diálogo después de unos segundos
 function autoActivateDialog(hideAfterSeconds) {
-    dialogDisplayedOneTime = getFromLocalStorage('dialogDisplayedOneTime', false);
+    dialogDisplayedOneTime = getFromLocalStorage('dialogDisplayedOneTime-n-3', false);
 
     if (!dialogDisplayedOneTime){
-        dialog.style.display = 'block';
-        dialog.style.lineHeight = "40px";
-        dialog.style.color = "#063555";
-        dialog.innerHTML =
+        dialogLong.style.display = 'block';
+        dialogLong.style.color = "#063555";
+        dialogLong.style.lineHeight = "40px";
+        dialogLong.style.textAlign = "left";
+        dialogLong.innerHTML =
             "Me cierro en 20 segundos!<br>" +             
             "Si quieres volver a leer esto y más instrucciones da click en el botón [ (?) ]<br>" +
             "**********************************************************************************<br>" +
-            "Nivel 1 - Condiciones:<br>" +
-            "•	Se puede viajar sin pasajeros<br>" +
-            "•	Nro. máximo de pasajeros en el barco: 1<br>" +
+            "Nivel 3 - Condiciones:<br>" +
+            "•	No se puede viajar solo!<br>" +
+            "•	Nro. máximo de pasajeros en el barco: 2<br>" +
             "**********************************************************************************<br>" +
             "Objetivo: Llevar a todos al lado derecho.<br>" +
             "Recuerda: Para subir o bajar un pasajero del barco dale click a su figura.<br>" +
@@ -324,20 +359,21 @@ function autoActivateDialog(hideAfterSeconds) {
             "**********************************************************************************<br>";
     
         setTimeout(function() {
-            dialog.style.display = 'none';
-            dialog.innerHTML = ""; 
+            dialogLong.style.display = 'none';
+            dialogLong.innerHTML = ""; 
         }, hideAfterSeconds * 1000);
     } 
-    saveToLocalStorage('dialogDisplayedOneTime', true);
+    saveToLocalStorage('dialogDisplayedOneTime-n-3', true);
 }
 
 
 ///////// Initialization /////////
 function init() {
     for (i = 0; i < 3; i++) {
+        // Aquí con sx controlo el lugar en donde se ubicarán las imágenes
         var x = $("#sx ." + names[i]);
         x.hide();
-        for (j = 0; j < 1; j++) 
+        for (j = 0; j < 2; j++) 
             x.append('<img src="../../resources/lccGame/images/' + names[i] + '.png"/>');
         x.show("slow");
     }
