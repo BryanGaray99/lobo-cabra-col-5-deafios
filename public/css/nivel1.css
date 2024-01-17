@@ -112,7 +112,6 @@ a:hover {
   display: flex;
   align-items: center;
   margin-right: auto;
-  position: relative;
   left: 10%
 }
 
@@ -140,7 +139,6 @@ a:hover {
   display: flex;
   align-items: center;
   margin-left: auto;
-  position: relative;
   right: 10%
 }
 
@@ -150,7 +148,7 @@ a:hover {
   background-color: rgba(12, 52, 181, 0.747);
   border: 1;
   border-color: #000;
-  color: #ffe5b4;
+  color: #ffffff;
   border-radius: 10px;
   cursor: pointer;
   margin-left: 20px;
@@ -290,7 +288,7 @@ a:hover {
   height: 100%;
   background-color: #999;
 	margin-top: 0px; 
-  background-image: url('../resources/lccGame/images/background.png');
+  background-image: url('../resources/lccGame/images/background2.png');
   background-repeat: no-repeat;
   background-size: 100% 100%; 
 }
@@ -304,11 +302,12 @@ img {
 .inizia {
 	font-family: Skranji;
 	font-size: 50px;
-	color: rgb(6, 53, 85);
-	position: relative;
+  border-color: rgba(6, 53, 85, 0.747);
+  background-color: rgba(6, 53, 85, 0.747);
+  color: #fff;
+  position: relative;
 	left: 47px;
-	top: 50%;
-	background-color: #ffffff;
+	top: 25%;
 	padding: 10px 40px 10px 40px;
 	border-radius: 20px;
 	border: 1px solid black;
@@ -360,13 +359,14 @@ img {
 #move-button {
 	display: none;
 	position: absolute;
-	bottom: 90px;
+	bottom: 110px;
 	left: 40%;
 	clear: both;
 	margin: auto;
 	width: 130px;
-	background: #ffffff;
-	color: rgb(6, 53, 85);
+  border-color: rgba(6, 53, 85, 0.747);
+  background-color: rgba(6, 53, 85, 0.747);
+  color: #fff;
 	text-align: center;
 	padding: 10px;
 	font-family: Skranji;
@@ -381,14 +381,21 @@ img {
 #dialog {
 	display: none;
 	position: absolute;
-	top: 20%;
-  left: 350px;
-	width: 450px;
+	top: 9%;
+  left: 4%;
+  width: 90%;
+  height: 80%;
 	font-family: sans-serif;
-	background: rgb(255, 224, 0);
+  font-weight: bold;
+	background: rgba(242, 207, 162, 0.786);
+  border-color: rgba(6, 53, 85, 0.747);
+  color: rgb(202, 14, 14);
+  border: 2px solid rgba(6, 53, 85, 0.747);
 	border-radius: 10px;
 	padding: 10px;
-	font-size: 20px;
-	text-align: center;
+	font-size: 30px;
 	z-index: 100;
+  text-align: center;
+  line-height: 71px; 
+  overflow-wrap: break-word; 
 }

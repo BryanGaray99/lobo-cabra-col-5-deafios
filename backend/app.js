@@ -63,6 +63,7 @@ app.get('/games/nivel-3', (req, res) => res.render('nivel-3.html'));
 app.get('/games/nivel-4', (req, res) => res.render('nivel-4.html'));
 app.get('/games/nivel-5', (req, res) => res.render('nivel-5.html'));
 
+app.get('/games/flappy-bird', (req, res) => res.render('flappy-bird.html'));
 app.get('/games/guess-the-color', (req, res) => res.render('colorGame.html'));
 app.get('/games/tetris', (req, res) => res.render('tetris.html'));
 app.get('/games/game-2048', (req, res) => res.render('game-2048.html'));
