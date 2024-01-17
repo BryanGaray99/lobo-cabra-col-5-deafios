@@ -155,43 +155,43 @@ h2{
     margin-right: 5px;
 }
 
-.game-2048{
+.nivel-2{
     color: #e0af0b;
 }
 
-.game-2048:hover{
+.nivel-2:hover{
     background-color: #e0af0b;
 }
 
-.tetris{
+.nivel-4{
     color: #458bdb;
 }
 
-.tetris:hover{
+.nivel-4:hover{
     background-color: #458bdb;
 }
 
-.flappy-bird{
+.nivel-1{
     color: #017e1e;
 }
 
-.flappy-bird:hover{
+.nivel-1:hover{
     background-color: #017e1e;
 }
 
-.guess-the-color{
+.nivel-5{
     color: #a03d08;
 }
 
-.guess-the-color:hover{
+.nivel-5:hover{
     background-color: #a03d08;
 }
 
-.classic-snake-game{
+.nivel-3{
     color: #025315;
 }
 
-.classic-snake-game:hover{
+.nivel-3:hover{
     background-color: #025315;
 }
 

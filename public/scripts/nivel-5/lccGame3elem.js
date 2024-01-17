@@ -1,25 +1,25 @@
-var sides = ["sx", "dx"];
-var names = ["cabra", "lobo", "col"];
-var space, lspace, turn = 0, timer, PC = true, PL = true, ZE = true, conta = 0;
+// var sides = ["sx", "dx"];
+// var names = ["cabra", "lobo", "col"];
+// var space, lspace, turn = 0, timer, PC = true, PL = true, ZE = true, conta = 0;
 
-function errore(t, tm) {
-    window.clearTimeout(timer);
-    $("#dialog").html(t).slideDown("fast", function() {
-        timer = window.setTimeout(function() {
-            $("#dialog").slideUp("fast");
-        }, tm * 1000);
-    });
-}
+// function errore(t, tm) {
+//     window.clearTimeout(timer);
+//     $("#dialog").html(t).slideDown("fast", function() {
+//         timer = window.setTimeout(function() {
+//             $("#dialog").slideUp("fast");
+//         }, tm * 1000);
+//     });
+// }
 
-function removeClick(t) {
-    $("#" + sides[t] + " img").removeClass("clicca").attr("onclick", "").unbind("click");
-}
+// function removeClick(t) {
+//     $("#" + sides[t] + " img").removeClass("clicca").attr("onclick", "").unbind("click");
+// }
 
-function restoreClick(t) {
-    $("#" + sides[t] + " img").addClass("clicca");
-    for (i = 0; i < 3; i++)
-        $("#" + sides[t] + " ." + names[i] + " img").attr("onclick", "enq(" + i + ")");
-}
+// function restoreClick(t) {
+//     $("#" + sides[t] + " img").addClass("clicca");
+//     for (i = 0; i < 3; i++)
+//         $("#" + sides[t] + " ." + names[i] + " img").attr("onclick", "enq(" + i + ")");
+// }
 
 function checkVinto() {
     if ($("#sx img").length == 9 && $("#zat img").length < 2) {
