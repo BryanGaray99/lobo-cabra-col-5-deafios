@@ -283,8 +283,12 @@ app.post('/api/editProfileScores', authenticateToken, async (req, res) => {
 
     if (user) {
       const currentScore = user[scoreFieldName] || 0;
-
-      if (currentScore === 0 || newScore < currentScore) {
+	  const currentTime = user[timeFieldName] || 0;
+      if (
+        currentScore === 0 ||
+        newScore < currentScore ||
+        (newScore === currentScore && newTime < currentTime)
+      ) {
 		user[scoreFieldName] = newScore;
 		user[timeFieldName] = newTime;
 		
