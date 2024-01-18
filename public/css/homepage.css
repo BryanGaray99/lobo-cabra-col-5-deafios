@@ -12,6 +12,8 @@
 
 body {
 	background-image: url("../resources/signup/background1.png");
+  background-size: cover;
+  background-attachment: fixed;
   height: 200px;
   width: 200px;
 	font-family: arial;
@@ -82,12 +84,16 @@ h2{
   justify-self:auto;
   justify-content: center;
 }
+
+.container .square {
+  margin: 0 10px; /* Ajusta el valor según sea necesario para tu diseño */
+}
+
 .scores:hover .square:not(:hover)
 {
   filter:sepia(75%);
 }
 .square:hover{
-  
     /* ////// */
   border-radius: 15%;
   /* border-top-right-radius: 15%;

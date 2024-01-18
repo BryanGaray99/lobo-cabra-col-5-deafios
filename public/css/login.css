@@ -13,6 +13,8 @@
 
 body {
 	background-image: url("../resources/signup/background1.png");
+	background-size: cover;
+    background-attachment: fixed;
     height: 200px;
     width: 200px;
 	font-family: arial;
@@ -169,7 +171,8 @@ input:focus {
 
 .err-message{
 	text-align: center;
-	color: palegoldenrod;
+	color: rgb(180, 10, 10);
+	font-weight: bold;
 	font-size: 20px;
 	padding-top: 10px;
 }

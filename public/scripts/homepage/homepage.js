@@ -8,13 +8,15 @@ function checkLoginStatus(){
     else{
         const ign = JSON.parse(window.atob(localStorage.getItem("JWT").split('.')[1])).ign;
         document.getElementById("hellomsg").innerHTML = "Bienvenido, " + ign;
+        getProfile();
     }
 }
 
 function fetchProfile(){
-    getProfile();
+    window.location.href = "http://localhost:4000/gamerProfile";
 }
 
 function logout(){
     userLogout();
 }
+

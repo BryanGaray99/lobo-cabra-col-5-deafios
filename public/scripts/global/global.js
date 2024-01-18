@@ -78,6 +78,31 @@ async function addScoreToLeaderboard(gameName, ign, hashedEmail, score){
   }
 }
 
+async function editProfileScores(gameName, ign, newScore, newTime){
+  const ACCESS_TOKEN = localStorage.getItem("JWT");
+
+  const result = await fetch('/api/editProfileScores', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'ACCESS_TOKEN '+ ACCESS_TOKEN,
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      ign, gameName, newScore, newTime
+    })
+  }).then(res => res.json());
+
+  // console.log('Response from server:', result);
+
+  if(result.status == 'error' && result.tokenExpired){
+    await getNewAcessToken();
+    return editProfileScores(gameName, ign, newScore);
+  } else if (result.status === 'ok') {
+  } else {
+    console.error('Failed to update score:', result.msg);
+  }
+}
+
 async function getLeaderboardScores(gameName){
   const ACCESS_TOKEN = localStorage.getItem("JWT");
   const result = await fetch('/api/leaderboard', {
@@ -131,8 +156,16 @@ async function getProfile(){
   .then(res => res.json())
   .then((res) => {
     console.log(res.user);
-    showProfile(res.user);
+    getUserData(res.user);
   });
+}
+
+function getUserData(user){
+  if(user){
+      var uuser = JSON.stringify(user);
+      console.log(uuser);
+      sessionStorage.setItem("user", uuser);
+  }
 }
 
 async function editProfile(){
@@ -142,6 +175,7 @@ async function editProfile(){
   // const ACCESS_TOKEN = localStorage.getItem("JWT");
   const user = JSON.parse(sessionStorage.getItem("user"));
   const ign = user.ign;
+
   const result = await fetch('/api/editProfile', {
   method: 'POST',
   headers: {

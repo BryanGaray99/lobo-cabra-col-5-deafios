@@ -1,15 +1,4 @@
-function showProfile(user)
-{
-    if(user){
-        var uuser = JSON.stringify(user);
-        console.log(uuser);
-        sessionStorage.setItem("user", uuser);
-        window.location.href = "http://localhost:4000/gamerProfile";
-    }
-
-}
-function show()
-{
+function show(){
     // console.log(user);
     const user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user);
@@ -19,10 +8,22 @@ function show()
     document.getElementById("ign").innerHTML = user.ign;
     document.getElementById("name").innerHTML =  user.firstName +" " + user.middleName + " "+ user.lastName;
     document.getElementById("email").innerHTML = user.useremail;
-    document.getElementById("flappybird").innerHTML = user.highscore_flappy_bird;
-    document.getElementById("snakegame").innerHTML = user.highscore_classic_snake;
-    document.getElementById("game2048").innerHTML = user.highscore_game_2048;
-    document.getElementById("tetris").innerHTML = user.highscore_tetris;
-    document.getElementById("guessthecolor").innerHTML = user.highscore_guess_the_color;
+    document.getElementById("nivel-1").innerHTML = user.moves_nivel_1;
+    document.getElementById("nivel-2-moves").innerHTML = user.moves_nivel_2 !== 0 ? "Movimientos: " + user.moves_nivel_2 : "Sin registros";
+    document.getElementById("nivel-2-time").innerHTML = user.time_nivel_2 !== 0 ? "Tiempo: " + formatearTiempoDecimal(user.time_nivel_2) : "";
+    document.getElementById("nivel-3").innerHTML = user.moves_nivel_3;
+    document.getElementById("nivel-4").innerHTML = user.moves_nivel_4;
+    document.getElementById("nivel-5").innerHTML = user.moves_nivel_5;
 
+}
+
+function formatearTiempoDecimal(totalMinutosDecimal) {
+  // Convertir a minutos y segundos
+  var minutos = Math.floor(totalMinutosDecimal);
+  var segundos = Math.round((totalMinutosDecimal - minutos) * 60);
+
+  // Formatear la cadena
+  var tiempoFormateado = minutos + " minutos y " + segundos + " segundos";
+
+  return tiempoFormateado;
 }

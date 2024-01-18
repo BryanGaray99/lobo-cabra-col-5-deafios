@@ -13,6 +13,8 @@
 
 body {
 	background-image: url("../resources/signup/background1.png");
+	background-size: cover;
+    background-attachment: fixed;
     height: 200px;
     width: 200px;
 	font-family: arial;

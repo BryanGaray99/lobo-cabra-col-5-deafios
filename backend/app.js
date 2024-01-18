@@ -64,10 +64,6 @@ app.get('/games/nivel-4', (req, res) => res.render('nivel-4.html'));
 app.get('/games/nivel-5', (req, res) => res.render('nivel-5.html'));
 
 app.get('/games/flappy-bird', (req, res) => res.render('flappy-bird.html'));
-app.get('/games/guess-the-color', (req, res) => res.render('colorGame.html'));
-app.get('/games/tetris', (req, res) => res.render('tetris.html'));
-app.get('/games/game-2048', (req, res) => res.render('game-2048.html'));
-app.get('/games/lccGame', (req, res) => res.render('lccGame.html'));
 app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
 
 app.get('/signup', (req, res) => res.render('signup.html'));
@@ -98,15 +94,15 @@ const sendEmail = (email, ign, verifyUniqueString) => {
 		},
 	});
 	var mailOptions;
-	let sender = "Arcade_Assemble"
+	let sender = "Lobo Cabra Col: 5 Desafios"
 	mailOptions = {
 		from: sender,
 		to: email,
-		subject: "Email confirmation",
+		subject: "Confirmación de correo",
 		html: `
-				<h2>Hi ${ign}, </h2>
-				<h4> You are almost ready to start enjoying Arcades Assemble. </h4>
-				<h4>Click <a href=http://localhost:4000/api/verify/${verifyUniqueString}> here </a> to verify your email.</h4>
+				<h2>Hola ${ign}, </h2>
+				<h4> Gracias por registrarte en Lobo Cabra Col: 5 Desafios. </h4>
+				<h4>Haz click <a href=http://localhost:4000/api/verify/${verifyUniqueString}> aquí </a> para confirmar tu correo.</h4>
 				`
 	}
 	transport.sendMail(mailOptions, function(error, response) {
@@ -161,7 +157,7 @@ app.get('/api/verify/:uniqueString', async (req, res) => {
 		res.redirect('/')
 	}
 	else
-		res.json({status: 'error', error: 'User not found'})
+		res.json({status: 'error', error: 'Usuario no encontrado'})
 })
 
 app.post('/api/login', async (req, res) => {
@@ -169,11 +165,11 @@ app.post('/api/login', async (req, res) => {
 	const user = await User.findOne({ ign }).lean()
 
 	if (!user) {
-		return res.json({ status: 'error', error: 'Invalid IGN/Password' })
+		return res.json({ status: 'error', error: 'Usuario/Contraseña Incorrecta' })
 	}
 
 	if( user.confirmed === false) {
-		return res.json({ status: 'error', error: 'Email not confirmed'})
+		return res.json({ status: 'error', error: 'Email no verificado' })
 	}
 
 	if (await bcrypt.compare(password, user.password)) {
@@ -193,7 +189,7 @@ app.post('/api/login', async (req, res) => {
 		return res.json({ status: 'ok', accessToken: accessToken, refreshToken: refreshToken })
 	}
 
-	res.json({ status: 'error', error: 'Invalid IGN/Password' })
+	res.json({ status: 'error', error: 'Usuario/Contraseña Incorrecta' })
 })
 
 function authenticateToken(req, res, next) {
@@ -270,6 +266,53 @@ app.post('/api/editProfile', async (req, res) => {
 	return res.json({ status: 'ok', msg: 'Entry updated'});
 })
 
+app.post('/api/editProfileScores', authenticateToken, async (req, res) => {
+  const { ign, gameName, newScore, newTime } = req.body;
+
+  // Asegurarse de que el nuevo puntaje no sea cero
+  if (newScore === 0) {
+    return res.json({ status: 'error', msg: 'New score cannot be zero' });
+  }
+
+  try {
+    // Construir el nombre del campo basado en el nombre del juego
+	const scoreFieldName = `moves_${gameName.replace('-', '_')}`;
+	const timeFieldName = `time_${gameName.replace('-', '_')}`;
+    // Buscar el usuario actual y su puntaje para el juego especificado
+    const user = await User.findOne({ ign: ign });
+
+    if (user) {
+      const currentScore = user[scoreFieldName] || 0;
+
+      if (currentScore === 0 || newScore < currentScore) {
+		user[scoreFieldName] = newScore;
+		user[timeFieldName] = newTime;
+		
+		await user.save((err, updatedUser) => {
+		  if (err) {
+			console.error('Error saving the updated score:', err);
+			res.status(500).json({ status: 'error', msg: 'Failed to save the updated score' });
+		  } else {
+			console.log(`Score saved successfully. New score for ${gameName}: ${updatedUser[scoreFieldName]}`);
+			console.log(`Time saved successfully. New time for ${gameName}: ${updatedUser[timeFieldName]}`);
+			res.json({ status: 'ok', msg: 'Score updated successfully', user: updatedUser });
+		  }
+		});
+      } else {
+        // No actualizar si el nuevo puntaje no es menor que el actual
+        console.log('New score is not lower than current score, not updating.');
+        res.json({ status: 'ok', msg: 'Score not updated, new score is not lower' });
+      }
+    } else {
+      console.log('User not found, cannot update score.');
+      res.json({ status: 'error', msg: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error updating score:', error);
+    res.status(500).json({ status: 'error', msg: 'Internal Server Error' });
+  }
+});
+
 app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
 	const {gameName, duration_mins} = await req.body;
 	try {
@@ -310,7 +353,7 @@ app.post('/api/games/nivel-5', authenticateToken, entry)
 
 app.post('/api/leaderboard', authenticateToken, async (req, res) => {
 	const {gameName} = await req.body
-	let records = await Leaderboard.find({gameName: gameName}).limit(10).sort([["score", "desc"]]).exec()
+	let records = await Leaderboard.find({gameName: gameName}).limit(10).sort([["score", "asc"]]).exec()
 	res.json({ status: 'ok', records: records});
 })
 

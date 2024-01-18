@@ -147,7 +147,8 @@ function checkVinto() {
         if(isLoggedIn){
             recordDurationStatistics(gameName, duration_mins);
             var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-            addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
+            editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
+            addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
         setTimeout(function(){location.reload();}, 15000);     
     }
@@ -202,14 +203,12 @@ function check() {
         var parts = src.split('/');
         var imageName = parts[parts.length - 1];
 
-        console.log("Image name: ",imageName);
 		if (imageName == 'cabra.png') p = 1;
 		if (imageName == 'lobo.png') l = 1;
 		if (imageName == 'col.png') c = 1;
 	}
 	PC = PC || (p == 1 && c == 1);
 	PL = PL || (p == 1 && l == 1);
-    console.log("PC: ", PC, "PL: ", PL, "ZE: ", ZE);
 
     x = $("#zat")[0].children;
 
@@ -219,8 +218,6 @@ function check() {
 function enq(i) {
     var zatNode = $("#zat")[0];
     
-    console.log("Enq: ", zatNode.children.length);
-
     if (zatNode.children.length > 1) return;
 
     var x = $("#" + sides[turn] + " ." + names[i])[0].children; // Obtén solo los elementos hijos
@@ -236,8 +233,6 @@ function enq(i) {
 
 function deq(i) {
     var zatNode = $("#zat")[0];
-
-    console.log("Enq: ", zatNode.children.length);
 
     var el, l = zatNode.children; // Obtén solo los elementos hijos
 
@@ -280,7 +275,6 @@ function getFromLocalStorage(key, defaultValue) {
     return storedValue ? JSON.parse(storedValue) : defaultValue;
 }
 function toggleMusic() {
-    console.log("toggleMusic");
     backgroundMusicEnabled = getFromLocalStorage('backgroundMusicEnabled', true);
 
     backgroundMusicEnabled = !backgroundMusicEnabled;
@@ -301,7 +295,6 @@ function startMusic() {
     if (backgroundMusicEnabled) {
         musicOnIcon.classList.remove("hidden");
         musicOffIcon.classList.add("hidden");
-        console.log("toggleMusic");
         backgroundMusic.play();
     }
     else {
@@ -378,7 +371,7 @@ function init() {
         x.show("slow");
     }
     for (i = 1; i < 3; i++) {
-        // Aquí con sx controlo el lugar en donde se ubicarán las imágenes
+        // Aquí con dx controlo el lugar en donde se ubicarán las imágenes
         var x = $("#dx ." + names[i]);
         x.hide();
         for (j = 0; j < 1; j++) 

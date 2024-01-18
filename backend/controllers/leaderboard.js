@@ -6,13 +6,15 @@ exports.entry = async (req, res) => {
 
 	try {
 		// Update individual game high scores for that user
-		const highscoreEntry = 'highscore_' + gameName.replace(/-/g, "_");
+		const highscoreEntry = gameName;
+		console.log('highscoreEntry: ', highscoreEntry);
+		console.log('score: ', score);
 
-		User.find({ign: ign}, (err, res) => {
-			res[0][`${highscoreEntry}`] = (res[0][`${highscoreEntry}`] > score) ? res[0][`${highscoreEntry}`] : score;
-			res[0].save();
-			console.log('User high score updated');
-		})
+		// User.find({ign: ign}, (err, res) => {
+		// 	res[0][`${highscoreEntry}`] = (res[0][`${highscoreEntry}`] > score) ? res[0][`${highscoreEntry}`] : score;
+		// 	res[0].save();
+		// 	console.log('User high score updated');
+		// })
 
 		// Check for existing entry from that user
 		const entryFound = await Leaderboard.findOne({ gameName: gameName, ign: ign}
@@ -28,7 +30,7 @@ exports.entry = async (req, res) => {
 		console.log(entryFound)
 		if(entryFound){
 			console.log(entryFound.score)
-			if(entryFound.score >= score){
+			if(entryFound.score <= score){
 				return res.json({ status: 'ok'});
 			} else {
 				await Leaderboard.findOneAndUpdate({ gameName: gameName, ign: ign}, req.body, {new: true});
@@ -40,7 +42,7 @@ exports.entry = async (req, res) => {
 			if(count>=50) {
 				const lastEntry = await Leaderboard.find({gameName: gameName}).sort({score: 1}).limit(1);
 				const lastEntry1 = lastEntry[0];
-				if(lastEntry1.score >= score){
+				if(lastEntry1.score <= score){
 					return res.json({status: 'ok'});
 				} else {
 					await Leaderboard.findOneAndUpdate({ gameName: lastEntry1.gameName, ign: lastEntry1.ign}, req.body, {new: true});

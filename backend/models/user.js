@@ -35,23 +35,43 @@ const UserSchema = new mongoose.Schema(
 		emailSecret: {
 			type: String,
 		},
-		highscore_flappy_bird: {
+		moves_nivel_1: {
 			type: Number,
 			default: 0
 		},
-		highscore_classic_snake: {
+		moves_nivel_2: {
 			type: Number,
 			default: 0
 		},
-		highscore_game_2048: {
+		moves_nivel_3: {
 			type: Number,
 			default: 0
 		},
-		highscore_guess_the_color: {
+		moves_nivel_4: {
 			type: Number,
 			default: 0
 		},
-		highscore_tetris: {
+		moves_nivel_5: {
+			type: Number,
+			default: 0
+		},
+		time_nivel_1: {
+			type: Number,
+			default: 0
+		},
+		time_nivel_2: {
+			type: Number,
+			default: 0
+		},
+		time_nivel_3: {
+			type: Number,
+			default: 0
+		},
+		time_nivel_4: {
+			type: Number,
+			default: 0
+		},
+		time_nivel_5: {
 			type: Number,
 			default: 0
 		}

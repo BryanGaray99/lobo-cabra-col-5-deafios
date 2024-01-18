@@ -138,7 +138,8 @@ function checkVinto() {
         if(isLoggedIn){
             recordDurationStatistics(gameName, duration_mins);
             var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-            addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
+            editProfileScores(gameName, payloadObject.ign, conta);
+            addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
         setTimeout(function(){location.reload();}, 15000);     
     }
@@ -198,7 +199,6 @@ function check() {
     }
 	PC = PC || (p == 1 && c == 1);
 	PL = PL || (p == 1 && l == 1);
-    console.log("PC: ", PC, "PL: ", PL, "ZE: ", ZE);
     x = $("#zat")[0].children;
     ZE = (x.length < 1);
 }
@@ -206,8 +206,6 @@ function check() {
 function enq(i) {
     var zatNode = $("#zat")[0];
     
-    console.log("Enq: ", zatNode.children.length);
-
     if (zatNode.children.length > 0) return;
 
     var x = $("#" + sides[turn] + " ." + names[i])[0].children; // Obtén solo los elementos hijos
@@ -223,8 +221,6 @@ function enq(i) {
 
 function deq(i) {
     var zatNode = $("#zat")[0];
-
-    console.log("Enq: ", zatNode.children.length);
 
     var el, l = zatNode.children; // Obtén solo los elementos hijos
 
@@ -266,7 +262,6 @@ function getFromLocalStorage(key, defaultValue) {
     return storedValue ? JSON.parse(storedValue) : defaultValue;
 }
 function toggleMusic() {
-    console.log("toggleMusic");
     backgroundMusicEnabled = getFromLocalStorage('backgroundMusicEnabled', true);
 
     backgroundMusicEnabled = !backgroundMusicEnabled;
@@ -287,7 +282,6 @@ function startMusic() {
     if (backgroundMusicEnabled) {
         musicOnIcon.classList.remove("hidden");
         musicOffIcon.classList.add("hidden");
-        console.log("toggleMusic");
         backgroundMusic.play();
     }
     else {
