@@ -155,15 +155,38 @@ async function getProfile(){
   .catch(err => console.log(err))
   .then(res => res.json())
   .then((res) => {
-    console.log(res.user);
+    // console.log(res.user);
     getUserData(res.user);
+    const currentRoute = window.location.pathname;
+    switch (currentRoute) {
+      case "/games":
+        checkAndUnlockLevels(res.user);
+        console.log("Funciona ruta games");
+        break;
+      case "/games/nivel-2/":
+        blockedLevel2(res.user);
+        console.log("Funciona ruta nivel 2");
+        break;
+      case "/games/nivel-3/":
+        blockedLevel3(res.user);
+        console.log("Funciona ruta nivel 3");
+        break;
+      case "/games/nivel-4/":
+        blockedLevel4(res.user);
+        console.log("Funciona ruta nivel 4");
+        break;
+      case "/games/nivel-5/":
+        blockedLevel5(res.user);
+        console.log("Funciona ruta nivel 5");
+        break; 
+    }
   });
 }
 
 function getUserData(user){
   if(user){
       var uuser = JSON.stringify(user);
-      console.log(uuser);
+      // console.log(uuser);
       sessionStorage.setItem("user", uuser);
   }
 }
@@ -192,4 +215,32 @@ async function editProfile(){
       sessionStorage.setItem("user", uuser);
       window.location.href="http://localhost:4000/gamerProfile";
   });
+}
+
+function checkLoginStatus(){
+  console.log("checkLoginStatus");
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+        document.getElementById("profile").style.display = "none";
+        document.getElementById("sign-out").innerHTML = "Login";
+        document.getElementById("nav-bar").style = "width: min-content; float: right; margin-right: 20px;";
+        checkAndUnlockLevels(null); 
+    }
+    else{
+        const ign = JSON.parse(window.atob(localStorage.getItem("JWT").split('.')[1])).ign;
+        document.getElementById("hellomsg").innerHTML = "Bienvenido, " + ign;
+        getProfile();
+    }
+}
+
+function checkLoginStatus(){
+  if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+    document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
+    blockedLevel2(null); 
+    blockedLevel3(null);
+    blockedLevel4(null);
+    blockedLevel5(null);
+  } else {
+    getProfile();
+  }
 }

@@ -22,6 +22,7 @@ var btn = document.querySelector(".leaderboard_pop");
 var sides = ["sx", "dx"];
 var names = ["cabra", "lobo", "col"];
 var space, lspace, rspace, turn = 0, timer, PC = true, PL = true, ZE = true; 
+var boat = document.getElementById("zat");
 
 var conta = 0;
 let timerInterval;
@@ -141,7 +142,7 @@ function checkVinto() {
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 300);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 5);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -387,13 +388,6 @@ autoActivateDialog(20);
 
 /////leaderboard pop up///////////
 
-function checkLoginStatus(){
-  if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
-    document.getElementById("login-btn").innerHTML = "Login";
-    isLoggedIn = false;
-  }
-}
-
 const scoresList = document.getElementsByClassName("members-with-score")[0];
 
 async function getScores(){
@@ -403,4 +397,36 @@ async function getScores(){
   } else {
     scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
   }
+}
+
+// Función para bloquear el nivel 
+function blockedLevel3(user) {
+    if (!(user && user.moves_nivel_2 <= 6 && user.time_nivel_2 <= 0.5 && user.moves_nivel_2 !== 0 && user.time_nivel_2 !== 0)) {
+        boat.style.pointerEvents = "none";
+        dialogLong.style.display = 'block';
+        dialogLong.style.color = "rgb(202, 14, 14)";
+        dialogLong.style.lineHeight = "40px";
+        dialogLong.style.textAlign = "center";
+        dialogLong.style.backgroundSize = "contain";
+        dialogLong.style.backgroundPosition = "center center";
+        dialogLong.style.backgroundImage = "url('../../resources/lccGame/images/locked.png')";
+        dialogLong.style.backgroundBlendMode = "exclusion";
+        dialogLong.innerHTML =
+            "**********************************************************************************<br>" +
+            "**********************************************************************************<br>" +
+            "Lo sentimos! :'(<br>" +
+            "Este nivel está bloqueado!<br>" +
+            "¿Quieres desbloquearlo?<br>" +
+            "**********************************************************************************<br>" +
+            "Paso 1: Debes estar logeado.<br>" +
+            "Paso 2: Supera el nivel 2 con un maximo de 6 movimientos y en al menos 30 segundos.<br>" +
+            "Paso 3: Divierte hasta lograr la meta, te espero!<br>" +
+            "**********************************************************************************<br>" +
+            "**********************************************************************************<br>";
+    }
+}
+
+// Login/logout
+function getAndSetData () {
+    checkLoginStatus();
 }

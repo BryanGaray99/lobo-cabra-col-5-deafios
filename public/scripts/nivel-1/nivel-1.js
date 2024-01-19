@@ -132,7 +132,7 @@ function checkVinto() {
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 15);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 5);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -377,6 +377,8 @@ function checkLoginStatus(){
   if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
     isLoggedIn = false;
+  } else {
+    getProfile();
   }
 }
 

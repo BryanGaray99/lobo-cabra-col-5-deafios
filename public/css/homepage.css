@@ -68,6 +68,10 @@ h2{
     margin-right: 10px;
 }
 
+.game.locked{
+    cursor: not-allowed;;
+}
+
 .game:hover{
     color: white;
 }
@@ -121,6 +125,7 @@ h2{
   border-color: ivory;
   object-fit: fill;
 }
+
 .text{
     vertical-align: middle;
     display: none;
@@ -132,8 +137,9 @@ h2{
     margin: 0;
     width: 100%;
     height: 100%;
-    color: white;
-    font-size: 1.5em;
+    color: rgb(114, 26, 26);
+    font-size: 20px;
+    font-weight: bold;
     font-family: Verdana;
   }
 
@@ -145,11 +151,36 @@ h2{
     height:100%;
     border-radius: 15%;
     display: flex;
+    cursor: pointer;
     justify-self: auto;
     align-content: center;
     justify-content: center;
 }
 
+.square.locked .text{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+.avatar img{
+    mix-blend-mode: multiply;
+    background: transparent;
+
+}
+.square.locked{
+    cursor: not-allowed;
+    border-radius: 15%;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border-bottom: 8px solid rgb(136, 116, 52);
+    border-right: 9px solid rgb(136, 116, 52);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.35), 0 10px 10px rgba(0,0,0,0.45);
+}
+.square.locked .image{
+    opacity: 0.3;
+}
+.square
 .games-logos{
     width: 100%;
     display: inline-flex;
