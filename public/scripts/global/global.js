@@ -137,59 +137,33 @@ async function getLeaderboardScores(gameName){
   }
 }
 
-async function getProfile(){
+async function getProfile() {
   const ACCESS_TOKEN = localStorage.getItem("JWT");
   const ign = JSON.parse(window.atob(ACCESS_TOKEN.split('.')[1])).ign;
-  // const ign = obj.ign;
-  console.log(ign);
-  const response = await fetch('/api/profile', {
-    method: 'POST',
-    headers: {
-      'Authorization': 'ACCESS_TOKEN '+ ACCESS_TOKEN,
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      ign
-    })
-  })
-  .catch(err => console.log(err))
-  .then(res => res.json())
-  .then((res) => {
-    // console.log(res.user);
-    getUserData(res.user);
-    const currentRoute = window.location.pathname;
-    switch (currentRoute) {
-      case "/games":
-        checkAndUnlockLevels(res.user);
-        console.log("Funciona ruta games");
-        break;
-      case "/games/nivel-2/":
-        blockedLevel2(res.user);
-        console.log("Funciona ruta nivel 2");
-        break;
-      case "/games/nivel-3/":
-        blockedLevel3(res.user);
-        console.log("Funciona ruta nivel 3");
-        break;
-      case "/games/nivel-4/":
-        blockedLevel4(res.user);
-        console.log("Funciona ruta nivel 4");
-        break;
-      case "/games/nivel-5/":
-        blockedLevel5(res.user);
-        console.log("Funciona ruta nivel 5");
-        break;
-      default:
-        break; 
-    }
-  });
-}
 
-function getUserData(user){
-  if(user){
-      var uuser = JSON.stringify(user);
-      // console.log(uuser);
-      sessionStorage.setItem("user", uuser);
+  try {
+    const response = await fetch('/api/profile', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'ACCESS_TOKEN ' + ACCESS_TOKEN,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        ign
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const res = await response.json();
+    console.log(res.user);
+    
+    // Llama a getUserData solo después de obtener la respuesta.
+    getUserData(res.user);
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -236,26 +210,67 @@ function checkLoginStatus(){
 
 function checkLevelStatus(){
   if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+    console.log("Bug")
     document.getElementById("login-btn").innerHTML = "Login";
     isLoggedIn = false;
     const currentRoute = window.location.pathname;
     switch (currentRoute) {
       case "/games/nivel-2/":
-        blockedLevel2(null); 
+        console.log("Bug2")
+        blockedLevel2(""); 
         break;
       case "/games/nivel-3/":
-        blockedLevel3(null);
+        blockedLevel3("");
         break;
       case "/games/nivel-4/":
-        blockedLevel4(null);
+        blockedLevel4("");
         break;
       case "/games/nivel-5/":
-        blockedLevel5(null);
+        blockedLevel5("");
         break;
       default:
         break; 
     }
   } else {
+    console.log("Todo ok")
     getProfile();
   }
+}
+
+function getUserData(user){
+  if(user){
+      var setUser = JSON.stringify(user);
+      console.log(setUser);
+      sessionStorage.setItem("user", setUser);
+      setUserData();
+  }
+}
+
+function setUserData(user){
+    var getUser = JSON.parse(sessionStorage.getItem("user"));
+    const currentRoute = window.location.pathname;
+    switch (currentRoute) {
+      case "/games":
+        checkAndUnlockLevels(getUser);
+        console.log("Funciona ruta games");
+        break;
+      case "/games/nivel-2/":
+        console.log("Funciona ruta nivel 2");
+        blockedLevel2(getUser);
+        break;
+      case "/games/nivel-3/":
+        blockedLevel3(getUser);
+        console.log("Funciona ruta nivel 3");
+        break;
+      case "/games/nivel-4/":
+        blockedLevel4(getUser);
+        console.log("Funciona ruta nivel 4");
+        break;
+      case "/games/nivel-5/":
+        blockedLevel5(getUser);
+        console.log("Funciona ruta nivel 5");
+        break;
+      default:
+        break; 
+    }
 }

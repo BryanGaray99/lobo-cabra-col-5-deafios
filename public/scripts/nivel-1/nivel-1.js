@@ -141,7 +141,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
-        setTimeout(function(){location.reload();}, 15000);     
+        setTimeout(function(){location.reload();}, 6000);     
     }
 }
 
@@ -158,7 +158,7 @@ function parti() {
             "**********************************************************************************<br>", 5);
         setTimeout(function(){
             location.reload();
-        }, 5000); 
+        }, 6000); 
         return
     };
     if (PC) {
@@ -172,7 +172,7 @@ function parti() {
             "**********************************************************************************<br>", 5);
         setTimeout(function(){
             location.reload();
-        }, 5000); 
+        }, 6000); 
         return
     }; 
     var nspace = (turn == 0) ? lspace : -lspace;

@@ -151,7 +151,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
         }
-        setTimeout(function(){location.reload();}, 15000);     
+        setTimeout(function(){location.reload();}, 6000);     
     }
 }
 
@@ -169,7 +169,7 @@ function parti() {
             "**********************************************************************************<br>", 5);
         setTimeout(function(){
             location.reload();
-        }, 5000); 
+        }, 6000); 
         return
     };
     if (PC) {
@@ -183,7 +183,7 @@ function parti() {
             "**********************************************************************************<br>", 5);
         setTimeout(function(){
             location.reload();
-        }, 5000); 
+        }, 6000); 
         return
     }; 
     var nspace = (turn == 0) ? rspace : lspace;
@@ -401,7 +401,9 @@ async function getScores(){
 
 // Función para bloquear el nivel 
 function blockedLevel5(user) {
+    console.log("user moves", user.moves_nivel_4, "user time", user.time_nivel_4);
     if (!(user && user.moves_nivel_4 <= 10 && user.time_nivel_4 <= 1 && user.moves_nivel_4 !== 0 && user.time_nivel_4 !== 0)) {
+        helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
         dialogLong.style.color = "rgb(202, 14, 14)";
@@ -419,7 +421,7 @@ function blockedLevel5(user) {
             "¿Quieres desbloquearlo?<br>" +
             "**********************************************************************************<br>" +
             "Paso 1: Debes estar logeado.<br>" +
-            "Paso 2: Supera el nivel 4 con un maximo de 10 movimientos y en al menos 30 segundos.<br>" +
+            "Paso 2: Supera el nivel 4 con un maximo de 12 movimientos y en al menos 1 minuto.<br>" +
             "Paso 3: Divierte hasta lograr la meta, te espero!<br>" +
             "**********************************************************************************<br>" +
             "**********************************************************************************<br>";

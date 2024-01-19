@@ -150,7 +150,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
-        setTimeout(function(){location.reload();}, 15000);     
+        setTimeout(function(){location.reload();}, 6000);     
     }
 }
 
@@ -168,7 +168,7 @@ function parti() {
             "**********************************************************************************<br>", 5);
         setTimeout(function(){
             location.reload();
-        }, 5000); 
+        }, 6000); 
         return
     };
     if (PC) {
@@ -182,7 +182,7 @@ function parti() {
             "**********************************************************************************<br>", 5);
         setTimeout(function(){
             location.reload();
-        }, 5000); 
+        }, 6000); 
         return
     }; 
     var nspace = (turn == 0) ? rspace : lspace;
@@ -409,7 +409,10 @@ async function getScores(){
 
 // Función para bloquear el nivel 
 function blockedLevel2(user) {
+    // console.log("user", user);
+    console.log("user moves", user.moves_nivel_1, "user time", user.time_nivel_1);
     if (!(user && user.moves_nivel_1 <= 10 && user.time_nivel_1 <= 0.5 && user.moves_nivel_1 !== 0 && user.time_nivel_1 !== 0)) {
+        helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
         dialogLong.style.color = "rgb(202, 14, 14)";
