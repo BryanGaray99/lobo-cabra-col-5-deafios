@@ -158,7 +158,7 @@ async function getProfile() {
     }
 
     const res = await response.json();
-    console.log(res.user);
+    // console.log(res.user);
     
     // Llama a getUserData solo después de obtener la respuesta.
     getUserData(res.user);
@@ -194,7 +194,7 @@ async function editProfile(){
 }
 
 function checkLoginStatus(){
-  console.log("checkLoginStatus");
+  // console.log("checkLoginStatus");
     if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
         document.getElementById("profile").style.display = "none";
         document.getElementById("sign-out").innerHTML = "Login";
@@ -210,13 +210,11 @@ function checkLoginStatus(){
 
 function checkLevelStatus(){
   if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
-    console.log("Bug")
     document.getElementById("login-btn").innerHTML = "Login";
     isLoggedIn = false;
     const currentRoute = window.location.pathname;
     switch (currentRoute) {
       case "/games/nivel-2/":
-        console.log("Bug2")
         blockedLevel2(""); 
         break;
       case "/games/nivel-3/":
@@ -232,7 +230,7 @@ function checkLevelStatus(){
         break; 
     }
   } else {
-    console.log("Todo ok")
+    // console.log("Todo ok")
     getProfile();
   }
 }
@@ -240,7 +238,7 @@ function checkLevelStatus(){
 function getUserData(user){
   if(user){
       var setUser = JSON.stringify(user);
-      console.log(setUser);
+      // console.log(setUser);
       sessionStorage.setItem("user", setUser);
       setUserData();
   }
@@ -252,23 +250,23 @@ function setUserData(user){
     switch (currentRoute) {
       case "/games":
         checkAndUnlockLevels(getUser);
-        console.log("Funciona ruta games");
+        // console.log("Funciona ruta games");
         break;
       case "/games/nivel-2/":
-        console.log("Funciona ruta nivel 2");
+        // console.log("Funciona ruta nivel 2");
         blockedLevel2(getUser);
         break;
       case "/games/nivel-3/":
         blockedLevel3(getUser);
-        console.log("Funciona ruta nivel 3");
+        // console.log("Funciona ruta nivel 3");
         break;
       case "/games/nivel-4/":
         blockedLevel4(getUser);
-        console.log("Funciona ruta nivel 4");
+        // console.log("Funciona ruta nivel 4");
         break;
       case "/games/nivel-5/":
         blockedLevel5(getUser);
-        console.log("Funciona ruta nivel 5");
+        // console.log("Funciona ruta nivel 5");
         break;
       default:
         break; 

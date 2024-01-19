@@ -401,7 +401,7 @@ async function getScores(){
 
 // Función para bloquear el nivel 
 function blockedLevel5(user) {
-    console.log("user moves", user.moves_nivel_4, "user time", user.time_nivel_4);
+    // console.log("user moves", user.moves_nivel_4, "user time", user.time_nivel_4);
     if (!(user && user.moves_nivel_4 <= 10 && user.time_nivel_4 <= 1 && user.moves_nivel_4 !== 0 && user.time_nivel_4 !== 0)) {
         helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
