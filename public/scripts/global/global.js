@@ -178,6 +178,8 @@ async function getProfile(){
       case "/games/nivel-5/":
         blockedLevel5(res.user);
         console.log("Funciona ruta nivel 5");
+        break;
+      default:
         break; 
     }
   });
@@ -232,14 +234,27 @@ function checkLoginStatus(){
     }
 }
 
-function checkLoginStatus(){
+function checkLevelStatus(){
   if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
     isLoggedIn = false;
-    blockedLevel2(null); 
-    blockedLevel3(null);
-    blockedLevel4(null);
-    blockedLevel5(null);
+    const currentRoute = window.location.pathname;
+    switch (currentRoute) {
+      case "/games/nivel-2/":
+        blockedLevel2(null); 
+        break;
+      case "/games/nivel-3/":
+        blockedLevel3(null);
+        break;
+      case "/games/nivel-4/":
+        blockedLevel4(null);
+        break;
+      case "/games/nivel-5/":
+        blockedLevel5(null);
+        break;
+      default:
+        break; 
+    }
   } else {
     getProfile();
   }

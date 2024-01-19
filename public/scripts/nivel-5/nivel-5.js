@@ -148,7 +148,7 @@ function checkVinto() {
         if(isLoggedIn){
             recordDurationStatistics(gameName, duration_mins);
             var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-            editProfileScores(gameName, payloadObject.ign, conta);
+            editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
         }
         setTimeout(function(){location.reload();}, 15000);     
@@ -428,5 +428,5 @@ function blockedLevel5(user) {
 
 // Login/logout
 function getAndSetData () {
-    checkLoginStatus();
+    checkLevelStatus();
 }

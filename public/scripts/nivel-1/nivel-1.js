@@ -138,7 +138,7 @@ function checkVinto() {
         if(isLoggedIn){
             recordDurationStatistics(gameName, duration_mins);
             var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-            editProfileScores(gameName, payloadObject.ign, conta);
+            editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
         setTimeout(function(){location.reload();}, 15000);     

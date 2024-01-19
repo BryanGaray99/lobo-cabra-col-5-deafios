@@ -436,5 +436,5 @@ function blockedLevel2(user) {
 
 // Login/logout
 function getAndSetData () {
-    checkLoginStatus();
+    checkLevelStatus();
 }
