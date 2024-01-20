@@ -13,9 +13,9 @@ const cors = require('cors');
 const User = require('./models/user')
 const DurationGame = require('./models/durationgame')
 const Leaderboard = require('./models/leaderboard');
+const Review = require('./models/review');
 
 const {entry} = require('./controllers/leaderboard')
-
 
 const port = 4000;
 
@@ -70,6 +70,7 @@ app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
 app.get('/gamerProfile', (req, res) => res.render('gamerProfile.html'));
 app.get('/editProfile', (req, res) => res.render('editProfile.html'));
+app.get('/review', (req, res) => res.render('review.html'));
 
 
 let refreshTokens = []
@@ -360,6 +361,42 @@ app.post('/api/leaderboard', authenticateToken, async (req, res) => {
 	let records = await Leaderboard.find({gameName: gameName}).limit(10).sort([["score", "asc"]]).exec()
 	res.json({ status: 'ok', records: records});
 })
+
+app.post('/api/reviews', authenticateToken, async (req, res) => {
+  try {
+    const { ign, review } = req.body;
+
+    // Validación simple
+    if (!ign || !review) {
+      return res.status(400).json({ error: 'Se requieren todos los campos.' });
+    }
+
+    // Buscar una revisión existente para el usuario
+    const existingReview = await Review.findOne({ ign });
+
+    if (existingReview) {
+      // Si existe una revisión, actualizarla en lugar de crear una nueva
+      existingReview.review = review;
+      await existingReview.save();
+      return res.json({ status: 'ok', message: 'Retroalimentación actualizada con éxito.' });
+    } else {
+      // Si no existe una revisión, crear una nueva
+      const nuevaReview = new Review({
+        ign,
+        review,
+      });
+
+      // Guardar en la base de datos
+      await nuevaReview.save();
+
+      // Respuesta exitosa
+      return res.json({ status: 'ok', message: 'Retroalimentación recibida con éxito.' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+});
 
 app.listen(
 	process.env.PORT || port,

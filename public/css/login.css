@@ -93,7 +93,7 @@ header h3 {
 
 }
 input {
-	background: rgba(228,232,243, 0.8) url("../images/sprite.png") ;
+	background: rgba(228,232,243, 0.8) url("../resources/login/images/sprite.png") ;
 	background-size: 20px 80px;
 	background-position: 0.5em 0.6em;
 	border: none;

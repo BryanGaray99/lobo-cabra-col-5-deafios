@@ -193,10 +193,34 @@ async function editProfile(){
   });
 }
 
+async function sendReview(review) {
+  const ACCESS_TOKEN = localStorage.getItem("JWT");
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const ign = user.ign;
+  try {
+    const response = await fetch('/api/reviews', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'ACCESS_TOKEN ' + ACCESS_TOKEN,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ign, review 
+      }),
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error en la llamada al endpoint:', error);
+    throw error;
+  }
+}
+
 function checkLoginStatus(){
   // console.log("checkLoginStatus");
     if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
         document.getElementById("profile").style.display = "none";
+        document.getElementById("review").style.display = "none";
         document.getElementById("sign-out").innerHTML = "Login";
         document.getElementById("nav-bar").style = "width: min-content; float: right; margin-right: 20px;";
         checkAndUnlockLevels(null); 
@@ -240,6 +264,24 @@ function getUserData(user){
       var setUser = JSON.stringify(user);
       // console.log(setUser);
       sessionStorage.setItem("user", setUser);
+      // Filtra solo las propiedades deseadas
+      const userDataToStore = {
+        moves_nivel_1: user.moves_nivel_1,
+        moves_nivel_2: user.moves_nivel_2,
+        moves_nivel_3: user.moves_nivel_3,
+        moves_nivel_4: user.moves_nivel_4,
+        moves_nivel_5: user.moves_nivel_5,
+        time_nivel_1: user.time_nivel_1,
+        time_nivel_2: user.time_nivel_2,
+        time_nivel_3: user.time_nivel_3,
+        time_nivel_4: user.time_nivel_4,
+        time_nivel_5: user.time_nivel_5,
+      };
+
+      // Serializa y guarda en el localStorage
+      const userDataJSON = JSON.stringify(userDataToStore);
+      localStorage.setItem("userData", userDataJSON);
+
       setUserData();
   }
 }
