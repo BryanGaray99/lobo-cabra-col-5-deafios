@@ -1,3 +1,4 @@
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express');
 const mongoose = require('mongoose');
 const engines = require('consolidate');
@@ -32,12 +33,33 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to remote MongoDB cluster
-// const dbURI = process.env.MONGODB_URI;
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const uri = process.env.MONGODB_URI;
 
-// Local MongoDB Server
-const dbURI = 'mongodb://127.0.0.1:27017/login-app-db';
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
-mongoose.connect(dbURI)
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+
+run().catch(console.dir);
+
+mongoose.connect(uri)
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', async () => {
