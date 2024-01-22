@@ -30,19 +30,7 @@ dotenv.config();
 // Setup Express app
 const app = express();
 app.use(express.json());
-
-// Middleware para habilitar CORS
-const whitelist = ['http://bg-lcc-game:10000','http://localhost:4000', 'http://35.160.120.126:10000', 'http://44.233.151.27:10000', 'http://34.211.200.85:10000']
-const options = {
-  origin: (origin, callback) => {
-    if (whitelist.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('no permitido'));
-    }
-  }
-};
-app.use(cors(options));
+app.use(cors());
 
 // Connect to remote MongoDB cluster
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -96,6 +84,9 @@ app.get('/games/nivel-2', (req, res) => res.render('nivel-2.html'));
 app.get('/games/nivel-3', (req, res) => res.render('nivel-3.html'));
 app.get('/games/nivel-4', (req, res) => res.render('nivel-4.html'));
 app.get('/games/nivel-5', (req, res) => res.render('nivel-5.html'));
+
+app.get('/games/flappy-bird', (req, res) => res.render('flappy-bird.html'));
+app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
 
 app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
