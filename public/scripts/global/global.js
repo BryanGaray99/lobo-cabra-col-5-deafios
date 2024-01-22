@@ -121,12 +121,12 @@ async function getLeaderboardScores(gameName){
     var innerhtml = "";
 
     for(var i=0; i<length; i++){
-      currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><div><img class="profile-pic" src="https://www.gravatar.com/avatar/${result.records[i].hashedEmail}?d=monsterid"/></div><span class="name">${result.records[i].ign}</span><span class="score">${result.records[i].score} pts.</span></div></div>`
+      currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><span class="name">${result.records[i].ign}</span><span class="score">${result.records[i].score} movimientos.</span></div></div>`
       innerhtml = innerhtml + currScoreHtml;
     }
 
     if(!innerhtml){
-      innerhtml = '<div class="empty-board" style="padding: 19px;"><span style="color: darkblue;font-size: 21px;">Looks like no one tops the board yet. Be the first.</span></div>';
+      innerhtml = '<div class="empty-board" style="padding: 19px;"><span style="color: darkblue;font-size: 21px;">Aun no hay registros, se el primero!</span></div>';
     }
     // console.log('innerhtml ' ,innerhtml);
     return innerhtml;
@@ -286,7 +286,7 @@ function getUserData(user){
   }
 }
 
-function setUserData(user){
+function setUserData(){
     var getUser = JSON.parse(sessionStorage.getItem("user"));
     const currentRoute = window.location.pathname;
     switch (currentRoute) {

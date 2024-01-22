@@ -34,16 +34,16 @@
     </div>
     <div class="games-nav-bar">
         <a href="/games/nivel-1/" class="game nivel-1">Nivel 1 </a>
-        <a href="/games/nivel-2/" id="nivel-2" class="game nivel-2 locked">Nivel 2 <i id="icon-nivel-2" class="fa fa-lock" style="font-size:24px"></i></a>
-        <a href="/games/nivel-3/" id="nivel-3" class="game nivel-3 locked">Nivel 3 <i id="icon-nivel-3" class="fa fa-lock" style="font-size:24px"></i></a>
-        <a href="/games/nivel-4/" id="nivel-4" class="game nivel-4 locked">Nivel 4 <i id="icon-nivel-4" class="fa fa-lock" style="font-size:24px"></i></a>
-        <a href="/games/nivel-5/" id="nivel-5" class="game nivel-5 locked">Nivel 5 <i id="icon-nivel-5" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-2/" id="nivel-2"  onclick="setUserData()" class="game nivel-2 locked">Nivel 2 <i id="icon-nivel-2" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-3/" id="nivel-3"  onclick="setUserData()" class="game nivel-3 locked">Nivel 3 <i id="icon-nivel-3" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-4/" id="nivel-4"  onclick="setUserData()" class="game nivel-4 locked">Nivel 4 <i id="icon-nivel-4" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-5/" id="nivel-5"  onclick="setUserData()" class="game nivel-5 locked">Nivel 5 <i id="icon-nivel-5" class="fa fa-lock" style="font-size:24px"></i></a>
     </div>
     <div class="container">
-        <div class="square" onclick="redirectToLevel('/games/nivel-1/')">
+        <div class="square" >
             <img src="/resources/homepage/nivel1prev.png" alt="Avatar" class="image">
         </div>
-        <div id="nivel-2-square" class="square locked" onclick="redirectToLevel('/games/nivel-2/')">
+        <div id="nivel-2-square" class="square locked">
             <img src="/resources/homepage/nivel2prev.png" alt="Avatar" class="image">
             <div class="text">
                 <p>
@@ -52,7 +52,7 @@
                     - En menos de 30 seg.<br>
             </div>   
         </div>
-        <div id="nivel-3-square" class="square locked" onclick="redirectToLevel('/games/nivel-3/')">
+        <div id="nivel-3-square" class="square locked">
             <img src="/resources/homepage/nivel3prev.png" alt="Avatar" class="image">
             <div class="text">
                 <p>
@@ -61,7 +61,7 @@
                     - En menos de 30 seg.<br>
             </div>   
         </div>
-        <div id="nivel-4-square" class="square locked" onclick="redirectToLevel('/games/nivel-4/')">
+        <div id="nivel-4-square" class="square locked">
             <img src="/resources/homepage/nivel4prev.png" alt="Avatar" class="image">
             <div class="text">
                 <p>
@@ -70,7 +70,7 @@
                     - En menos de 1 min.<br>
             </div>   
         </div>
-        <div id="nivel-5-square" class="square locked" onclick="redirectToLevel('/games/nivel-5/')">
+        <div id="nivel-5-square" class="square locked">
             <img src="/resources/homepage/nivel5prev.png" alt="Avatar" class="image">
             <div class="text">
                 <p>
@@ -79,11 +79,6 @@
                     - En menos de 1 min.<br>
             </div>   
         </div>
-        <script>
-            function redirectToLevel(url) {
-                window.location.href = url;
-            }
-        </script>
         <script src="/scripts/homepage/homepage.js"></script>
     </div>
 </body>

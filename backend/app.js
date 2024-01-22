@@ -423,6 +423,6 @@ app.post('/api/reviews', authenticateToken, async (req, res) => {
 app.listen(
 	process.env.PORT || port,
 	console.log('App is running on port ' + port),
-	console.log('To open in browser: https://bg-lcc-game.onrender.com/login')
+	console.log('To open in browser: http://localhost:4000/login')
 )
 

@@ -77,6 +77,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: row-reverse;
 }
 #forimage {
     width: 20px;
@@ -136,12 +137,14 @@
     margin: auto 0 12px 0;
     color: rgb(158, 155, 155);
     font-family: 'New Tegomin', serif;
+    font-size: 18px;
+    margin-left: 8px;
 }
 .score {
     margin: auto 0;
     font-family: 'Zen Dots', cursive;
-    font-size: 10px;
-    margin-right: 8px;
+    font-size: 12px;
+    margin-right: -22px;
 }
 .single-member-score:nth-child(2) .position_number {
     background:chocolate;

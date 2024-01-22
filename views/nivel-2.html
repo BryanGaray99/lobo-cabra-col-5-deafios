@@ -21,10 +21,10 @@
         </div>
         <ul>
             <li><a href="/games/nivel-1/" class="nivel-1">Nivel 1</a></li>
-            <li><a href="#" class="active nivel-2">Nivel 2</a></li>
-            <li><a href="/games/nivel-3/" class="nivel-3">Nivel 3</a></li>
-            <li><a href="/games/nivel-4/" class="nivel-4">Nivel 4</a></li>
-            <li><a href="/games/nivel-5/" class="nivel-5">Nivel 5</a></li>
+            <li><a href="#" class="active nivel-2"  onclick="setUserData()">Nivel 2</a></li>
+            <li><a href="/games/nivel-3/" onclick="setUserData()" class="nivel-3">Nivel 3</a></li>
+            <li><a href="/games/nivel-4/" onclick="setUserData()" class="nivel-4">Nivel 4</a></li>
+            <li><a href="/games/nivel-5/" onclick="setUserData()" class="nivel-5">Nivel 5</a></li>
             <li onclick="logout()"><a href="#" id="login-btn">Logout</a></li>
             <li><a href="/games">Return</a></li>
         </ul>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="game-board">
-                <div id="game">
+                <div id="game" style="display: none">
                     <div id="dialog-short"></div>
                     <div id="dialog-long"></div>
                     <div id="game">

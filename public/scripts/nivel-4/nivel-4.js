@@ -18,6 +18,7 @@ var dialogShort = document.getElementById('dialog-short');
 var dialogDisplayedOneTime;
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
+var gameBoard = document.getElementById("game");
 
 var sides = ["sx", "dx"];
 var names = ["cabra", "lobo", "col"];
@@ -412,6 +413,7 @@ async function getScores(){
 function blockedLevel4(user) {
     // console.log("user moves", user.moves_nivel_3, "user time", user.time_nivel_3);
     if (!(user && user.moves_nivel_3 <= 15 && user.time_nivel_3 <= 1 && user.moves_nivel_3 !== 0 && user.time_nivel_3 !== 0)) {
+        gameBoard.style.display= "block";
         helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
@@ -434,6 +436,9 @@ function blockedLevel4(user) {
             "Paso 3: Divierte hasta lograr la meta, te espero!<br>" +
             "**********************************************************************************<br>" +
             "**********************************************************************************<br>";
+    }
+    else {
+        gameBoard.style.display= "block";
     }
 }
 
