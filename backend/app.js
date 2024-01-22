@@ -30,7 +30,19 @@ dotenv.config();
 // Setup Express app
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Middleware para habilitar CORS
+const whitelist = ['http://bg-lcc-game:10000','http://localhost:4000', 'http://35.160.120.126:10000', 'http://44.233.151.27:10000', 'http://34.211.200.85:10000']
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(newError('no permitido'));
+    }
+  }
+};
+app.use(cors(options));
 
 // Connect to remote MongoDB cluster
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -125,7 +137,7 @@ const sendEmail = (email, ign, verifyUniqueString) => {
 		html: `
 				<h2>Hola ${ign}, </h2>
 				<h4> Gracias por registrarte en Lobo Cabra Col: 5 Desafios. </h4>
-				<h4>Haz click <a href=http://localhost:4000/api/verify/${verifyUniqueString}> aquí </a> para confirmar tu correo.</h4>
+				<h4>Haz click <a href=https://bg-lcc-game.onrender.com/api/verify/${verifyUniqueString}> aquí </a> para confirmar tu correo.</h4>
 				`
 	}
 	transport.sendMail(mailOptions, function(error, response) {
@@ -423,6 +435,6 @@ app.post('/api/reviews', authenticateToken, async (req, res) => {
 app.listen(
 	process.env.PORT || port,
 	console.log('App is running on port ' + port),
-	console.log('To open in browser: http://localhost:' + port)
+	console.log('To open in browser: https://bg-lcc-game.onrender.com/login')
 )
 

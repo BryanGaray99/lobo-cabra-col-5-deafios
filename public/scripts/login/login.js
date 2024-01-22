@@ -24,7 +24,7 @@ async function loginUser(e){
 		// accessToken and refreshToken and status : 'ok', will be sent as result
 		localStorage.setItem("JWT", result.accessToken);
 		localStorage.setItem("RefreshToken", result.refreshToken);
-		window.location.href = "http://localhost:4000/games";
+		window.location.href = "/games";
 	} else {
         document.getElementById("err-message").innerHTML = result.error;
     }
@@ -44,7 +44,7 @@ close.addEventListener("click", () => {
 });
 
 yes.addEventListener("click", () => {
-	window.location.href = "http://localhost:4000/games";
+	window.location.href = "/games";
 });
 
 no.addEventListener("click", () => {

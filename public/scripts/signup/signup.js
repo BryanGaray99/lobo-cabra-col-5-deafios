@@ -45,7 +45,7 @@ async function signupUser(e){
 
 function countDown(){
     if(seconds < 0){
-        window.location.href = "http://localhost:4000/login";
+        window.location.href = "/login";
     } else {
         document.getElementById("countDown").innerHTML = seconds + ' secs';
         seconds = seconds-1;
