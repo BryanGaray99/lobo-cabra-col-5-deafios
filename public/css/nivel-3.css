@@ -188,12 +188,13 @@ a:hover {
 /* ////////Leaderboard cup//// */
 .leaderboard_pop {
 	width: 100px;
-  	height: 100px;
+  height: 100px;
 	position: fixed;
-    bottom: 30px;
-    right: 10px;
-    line-height: 1;
-    cursor: pointer;
+  bottom: 30px;
+  right: 10px;
+  line-height: 1;
+  z-index: 100;
+  cursor: pointer;
 	-webkit-animation: wobble-hor-bottom 5s both;
 	        animation: wobble-hor-bottom 5s both;
 	        animation-iteration-count: infinite;
