@@ -13,7 +13,7 @@
     <script src="/scripts/gamerProfile/gamerProfile.js"></script>
 </head>
 
-<body onload="getAndSetData()">
+<body onload="checkLoginStatus()">
     <div id="review" class="dropdown">
         <div class="dropbtn">
             <div class="avatar-top"><img src="../resources/homepage/reviewImage.png" class="profileImageShort" width="100px"></div>
@@ -34,10 +34,10 @@
     </div>
     <div class="games-nav-bar">
         <a href="/games/nivel-1/" class="game nivel-1">Nivel 1 </a>
-        <a href="/games/nivel-2/" id="nivel-2"  onclick="setUserData()" class="game nivel-2 locked">Nivel 2 <i id="icon-nivel-2" class="fa fa-lock" style="font-size:24px"></i></a>
-        <a href="/games/nivel-3/" id="nivel-3"  onclick="setUserData()" class="game nivel-3 locked">Nivel 3 <i id="icon-nivel-3" class="fa fa-lock" style="font-size:24px"></i></a>
-        <a href="/games/nivel-4/" id="nivel-4"  onclick="setUserData()" class="game nivel-4 locked">Nivel 4 <i id="icon-nivel-4" class="fa fa-lock" style="font-size:24px"></i></a>
-        <a href="/games/nivel-5/" id="nivel-5"  onclick="setUserData()" class="game nivel-5 locked">Nivel 5 <i id="icon-nivel-5" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-2/" id="nivel-2" class="game nivel-2 locked">Nivel 2 <i id="icon-nivel-2" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-3/" id="nivel-3" class="game nivel-3 locked">Nivel 3 <i id="icon-nivel-3" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-4/" id="nivel-4"  class="game nivel-4 locked">Nivel 4 <i id="icon-nivel-4" class="fa fa-lock" style="font-size:24px"></i></a>
+        <a href="/games/nivel-5/" id="nivel-5" class="game nivel-5 locked">Nivel 5 <i id="icon-nivel-5" class="fa fa-lock" style="font-size:24px"></i></a>
     </div>
     <div class="container">
         <div class="square" >

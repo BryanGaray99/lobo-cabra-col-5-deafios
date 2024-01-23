@@ -132,7 +132,8 @@ function checkVinto() {
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 5);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent + 
+        ". En breve se reiniciará la página. " + "<a href='/review'>Gracias por jugar, deja tu review :)</a>", 7);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -141,7 +142,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
-        setTimeout(function(){location.reload();}, 6000);     
+        setTimeout(function(){location.reload();}, 7000);     
     }
 }
 
@@ -377,8 +378,6 @@ function checkLoginStatus(){
   if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
     isLoggedIn = false;
-  } else {
-    getProfile();
   }
 }
 
@@ -389,6 +388,6 @@ async function getScores(){
     const innerhtml = await getLeaderboardScores(gameName);
     scoresList.innerHTML = innerhtml;
   } else {
-    scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    scoresList.innerHTML = '<div class="not-logged-in"><span>Porfavor <a href="/login">registrate</a> para guardar tu puntuación.</span></div>';
   }
 }

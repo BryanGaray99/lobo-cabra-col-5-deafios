@@ -104,6 +104,7 @@ function errore(t, tm) {
 function vitoria(t, tm) {
     window.clearTimeout(timer);
     dialogShort.style.color = "#063555";
+    dialogShort.style.lineHeight = "70px";
     $("#dialog-short").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
@@ -143,7 +144,9 @@ function checkVinto() {
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 5);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent + 
+                ". Te felicito has superado los 5 desafíos, gracias por jugar, puedes volver al menú principal y dejar tu calificación del juego:)" +
+                "<a href='/review'> Dejar un review</a>", 10);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -152,7 +155,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
         }
-        setTimeout(function(){location.reload();}, 6000);     
+        setTimeout(function(){location.reload();}, 10000);     
     }
 }
 
@@ -379,11 +382,6 @@ function init() {
     updateMoves();
 }
 
-function logout(){
-  isLoggedIn = false;
-  userLogout();
-}
-
 startMusic();
 autoActivateDialog(20);
 
@@ -396,15 +394,15 @@ async function getScores(){
     const innerhtml = await getLeaderboardScores(gameName);
     scoresList.innerHTML = innerhtml;
   } else {
-    scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    scoresList.innerHTML = '<div class="not-logged-in"><span>Porfavor <a href="/login">registrate</a> para guardar tu puntuación.</span></div>';
   }
 }
 
 // Función para bloquear el nivel 
-function blockedLevel5(user) {
-    // console.log("user moves", user.moves_nivel_4, "user time", user.time_nivel_4);
-    if (!(user && user.moves_nivel_4 <= 10 && user.time_nivel_4 <= 1 && user.moves_nivel_4 !== 0 && user.time_nivel_4 !== 0)) {
-        gameBoard.style.display= "block";
+function blockedLevel5() {
+    const userScores = JSON.parse(sessionStorage.getItem("user"));
+    if (!(userScores && userScores.moves_nivel_4 <= 10 && userScores.time_nivel_4 <= 1 && userScores.moves_nivel_4 !== 0 && userScores.time_nivel_4 !== 0)) {
+        console.log("Bloqueo N5");
         helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
@@ -434,6 +432,15 @@ function blockedLevel5(user) {
 }
 
 // Login/logout
-function getAndSetData () {
-    checkLevelStatus();
+function logout(){
+  isLoggedIn = false;
+  userLogout();
+}
+
+function checkLoginStatus5(){
+    blockedLevel5();
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+      document.getElementById("login-btn").innerHTML = "Login";
+      isLoggedIn = false;
+    }
 }

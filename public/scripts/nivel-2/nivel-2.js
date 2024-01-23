@@ -142,7 +142,8 @@ function checkVinto() {
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 5);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent + 
+            ". En breve se reiniciará la página. " + "<a href='/review'>Gracias por jugar, deja tu review :)</a>", 7);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -151,7 +152,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta, duration_mins);
         }
-        setTimeout(function(){location.reload();}, 6000);     
+        setTimeout(function(){location.reload();}, 7000);     
     }
 }
 
@@ -387,11 +388,6 @@ function init() {
     updateMoves();
 }
 
-function logout(){
-  isLoggedIn = false;
-  userLogout();
-}
-
 startMusic();
 autoActivateDialog(20);
 
@@ -409,10 +405,11 @@ async function getScores(){
 }
 
 // Función para bloquear el nivel 
-function blockedLevel2(user) {
-    // console.log("user moves", user.moves_nivel_1, "user time", user.time_nivel_1);
-    if (!(user && user.moves_nivel_1 <= 10 && user.time_nivel_1 <= 0.5 && user.moves_nivel_1 !== 0 && user.time_nivel_1 !== 0)) {
-        gameBoard.style.display= "block";
+function blockedLevel2() {
+    const userScores = JSON.parse(sessionStorage.getItem("user"));
+    if (!(userScores && userScores.moves_nivel_1 <= 10 && userScores.time_nivel_1 <= 0.5 && userScores.moves_nivel_1 !== 0 && userScores.time_nivel_1 !== 0)) {
+        console.log("Bloqueo N2");
+        // gameBoard.style.display= "block";
         helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
@@ -442,6 +439,15 @@ function blockedLevel2(user) {
 }
 
 // Login/logout
-function getAndSetData () {
-    checkLevelStatus();
+function logout(){
+  isLoggedIn = false;
+  userLogout();
+}
+
+function checkLoginStatus2(){
+    blockedLevel2();
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+      document.getElementById("login-btn").innerHTML = "Login";
+      isLoggedIn = false;
+    } 
 }

@@ -395,17 +395,13 @@ img {
   font-family: sans-serif;
   text-align: left;
   font-weight: bold;
-  border-radius: 10px;
-	padding: 10px;
-  border: 2px solid rgba(6, 53, 85, 0.747);
 	font-size: 30px;
-	z-index: 100;
+	z-index: 50;
 
-	top: 9%;
-  left: 4%;
-  width: 1100px;
-  height: 80%;
-  line-height: 71px; 
+  width: 1200px;
+  height: 90%;
+  margin: 0 auto;
+  line-height: 80px; 
 
 	background: rgba(255, 241, 89, 0.719);
   border-color: rgba(6, 53, 85, 0.747);
@@ -426,7 +422,7 @@ img {
 	top: 9%;
   left: 4%;
   width: 1100px;
-  height: 20%;
+  height: 35%;
   line-height: 60px; 
 
 	background: rgba(255, 241, 89, 0.719);

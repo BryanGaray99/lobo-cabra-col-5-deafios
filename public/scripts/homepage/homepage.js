@@ -7,8 +7,8 @@ function logout(){
 }
 
 
-function checkAndUnlockLevels(user) {
-    // Nivel 1 siempre está desbloqueado, no es necesario verificar
+function checkAndUnlockLevels() {
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     // Nivel 2
     const nivel2 = document.getElementById("nivel-2");
@@ -20,12 +20,10 @@ function checkAndUnlockLevels(user) {
         nivel2.style.pointerEvents = "auto"; // Restaurar la interacción
         icon2.style.display = "none";
         square2.classList.remove("locked");
-        square2.style.pointerEvents = "auto"; // Restaurar la interacción
     } else {
         nivel2.classList.add("locked");
         nivel2.style.pointerEvents = "none";
         square2.classList.add("locked");
-        square2.style.pointerEvents = "none";
     }
 
     // Nivel 3
@@ -38,12 +36,10 @@ function checkAndUnlockLevels(user) {
         nivel3.style.pointerEvents = "auto";
         icon3.style.display = "none";
         square3.classList.remove("locked");
-        square3.style.pointerEvents = "auto";
     } else {
         nivel3.classList.add("locked");
         nivel3.style.pointerEvents = "none";
         square3.classList.add("locked");
-        square3.style.pointerEvents = "none";
     }
 
     // Nivel 4
@@ -56,12 +52,10 @@ function checkAndUnlockLevels(user) {
         nivel4.style.pointerEvents = "auto";
         icon4.style.display = "none";
         square4.classList.remove("locked");
-        square4.style.pointerEvents = "auto";
     } else {
         nivel4.classList.add("locked");
         nivel4.style.pointerEvents = "none";
         square4.classList.add("locked");
-        square4.style.pointerEvents = "none";
     }
 
     // Nivel 5
@@ -73,15 +67,25 @@ function checkAndUnlockLevels(user) {
         nivel5.style.pointerEvents = "auto";
         icon5.style.display = "none";
         square5.classList.remove("locked");
-        square5.style.pointerEvents = "auto";
     } else {
         nivel5.classList.add("locked");
         nivel5.style.pointerEvents = "none";
         square5.classList.add("locked");
-        square5.style.pointerEvents = "none";
     }
 }
 
-function getAndSetData () {
-    checkLoginStatus();
+function checkLoginStatus(){
+  // console.log("checkLoginStatus");
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+        document.getElementById("profile").style.display = "none";
+        document.getElementById("review").style.display = "none";
+        document.getElementById("sign-out").innerHTML = "Login";
+        document.getElementById("nav-bar").style = "width: min-content; float: right; margin-right: 20px;";
+        checkAndUnlockLevels(null); 
+    }
+    else{
+        const ign = JSON.parse(window.atob(localStorage.getItem("JWT").split('.')[1])).ign;
+        document.getElementById("hellomsg").innerHTML = "Bienvenido, " + ign;
+        getProfile();
+    }
 }

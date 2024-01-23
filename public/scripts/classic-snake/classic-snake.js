@@ -548,6 +548,6 @@ async function getScores(){
     const innerhtml = await getLeaderboardScores(gameName);
     scoresList.innerHTML = innerhtml;
   } else {
-    scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    scoresList.innerHTML = '<div class="not-logged-in"><span>Porfavor <a href="/login">registrate</a> para guardar tu puntuación.</span></div>';
   }
 }

@@ -142,8 +142,8 @@ function checkVinto() {
 
         $("#game img").removeClass("clicca").off("click");
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
-
-        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent+ ".", 5);
+        vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent + 
+        ". En breve se reiniciará la página. " + "<a href='/review'>Gracias por jugar, deja tu review :)</a>", 7);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -152,7 +152,7 @@ function checkVinto() {
             editProfileScores(gameName, payloadObject.ign, conta, duration_mins);
             addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, conta);
         }
-        setTimeout(function(){location.reload();}, 6000);     
+        setTimeout(function(){location.reload();}, 7000);     
     }
 }
 
@@ -379,11 +379,6 @@ function init() {
     updateMoves();
 }
 
-function logout(){
-  isLoggedIn = false;
-  userLogout();
-}
-
 startMusic();
 autoActivateDialog(20);
 
@@ -396,15 +391,15 @@ async function getScores(){
     const innerhtml = await getLeaderboardScores(gameName);
     scoresList.innerHTML = innerhtml;
   } else {
-    scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    scoresList.innerHTML = '<div class="not-logged-in"><span>Porfavor <a href="/login">registrate</a> para guardar tu puntuación.</span></div>';
   }
 }
 
 // Función para bloquear el nivel 
-function blockedLevel3(user) {
-    // console.log("user moves", user.moves_nivel_2, "user time", user.time_nivel_2);
-    if (!(user && user.moves_nivel_2 <= 6 && user.time_nivel_2 <= 0.5 && user.moves_nivel_2 !== 0 && user.time_nivel_2 !== 0)) {
-        gameBoard.style.display= "block";
+function blockedLevel3() {
+    const userScores = JSON.parse(sessionStorage.getItem("user"));
+    if (!(userScores && userScores.moves_nivel_2 <= 6 && userScores.time_nivel_2 <= 0.5 && userScores.moves_nivel_2 !== 0 && userScores.time_nivel_2 !== 0)) {
+        console.log("Bloqueo N3");
         helpButton.style.pointerEvents = "none";
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
@@ -434,6 +429,15 @@ function blockedLevel3(user) {
 }
 
 // Login/logout
-function getAndSetData () {
-    checkLevelStatus();
+function logout(){
+  isLoggedIn = false;
+  userLogout();
+}
+
+function checkLoginStatus3(){
+    blockedLevel3();
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+      document.getElementById("login-btn").innerHTML = "Login";
+      isLoggedIn = false;
+    } 
 }
