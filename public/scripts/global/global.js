@@ -212,7 +212,7 @@ async function editProfile(){
       user.middleName = middleName;
       let uuser = JSON.stringify(user);
       sessionStorage.setItem("user", uuser);
-      window.location.href="/gamerProfile";
+      window.location.href="/games";
   });
 }
 
