@@ -119,9 +119,9 @@ a:hover {
 /* Header */
 .game-screen {
   width: 100%;
-  margin: 0 auto;
+  margin: 10px auto;
   position: relative;
-  bottom: 50px;
+  bottom: 30px;
   display: block;
 }
 
@@ -138,8 +138,7 @@ h2 {
   background: rgb(6, 53, 85);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  margin: 10px auto;
 }
 
 /* ////////Controls and Info//// */
