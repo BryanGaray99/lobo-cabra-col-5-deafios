@@ -672,6 +672,12 @@ img {
 
 /* Game Media Queries */
 @media screen and (max-width: 650px) {
+  h2{
+    margin: 20px auto;
+  }
+  .game-screen {
+    bottom: 0;
+  }
   .game-board {
     width: calc(1200px / 4);
     height: calc(600px / 4);
