@@ -20,6 +20,26 @@ body {
   position: absolute;
 }
 
+.not-logged-panel {
+  display: none;
+  background-color: #fff;
+  color: #470202;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 80%;
+  max-width: fit-content;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.not-logged-panel.unlocked {
+  display: flex;
+}
+
 .panel-container {
   background-color: #fff;
   color: #555;
@@ -34,6 +54,10 @@ body {
   max-width: fit-content;
   padding: 30px;
   margin: 0 auto;
+}
+
+.panel-container.blocked {
+  display: none;
 }
 
 .panel-container strong {

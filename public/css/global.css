@@ -8,8 +8,8 @@
     opacity: 0;
     top:0;
     left:0;
-    height:100vh;
-    width: 100vw;
+    height:100%;
+    width: 100%;
     pointer-events: none;
     transition: opacity 0.4s ease-in-out;
 }
@@ -19,7 +19,6 @@
     z-index: 1005;
 }
 .modal {
-    background-color: antiquewhite;
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -64,7 +63,7 @@
     margin: 0 auto;
     box-shadow: 10px 10px 5px rgb(32, 7, 7);
     width: 60%;
-    min-width: 60%;
+    min-width: 80%;
     height: 435px;
     border-radius:20px 20px 20px 0px;
 }
@@ -139,6 +138,7 @@
     font-family: 'New Tegomin', serif;
     font-size: 18px;
     margin-left: 8px;
+    margin-right: 8px;
 }
 .score {
     margin: auto 0;
@@ -188,4 +188,21 @@
 .not-logged-in span, .not-logged-in a{
     color: brown;
     font-size: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    #arcade {
+        font-size: 20px;
+    }
+    .name {
+        font-size: 16px;
+    }
+    .details-for-member{
+        padding: 0px;
+    }
+    .details-for-member .score {
+        margin-right: 0;
+        font-size: 10px;
+        display: block;
+    }
 }

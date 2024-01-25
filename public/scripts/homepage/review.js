@@ -54,4 +54,9 @@ sendBtn.addEventListener("click", () => {
   sendReview(getRatingValue(selectedRating));
 });
 
-
+function checkLoginStatus(){
+  if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+    document.getElementById("panel").classList.add("blocked");
+    document.getElementById("not-logged-pannel").classList.add("unlocked");
+  }
+}

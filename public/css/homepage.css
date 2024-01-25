@@ -80,6 +80,7 @@ li a:hover{
 }
 
 .burger-menu-bar {
+  display: none;
   width: 30px;
   height: 3px;
   background-color: rgb(46, 73, 112);
@@ -133,7 +134,7 @@ h2{
   font-family: 'Bungee Shade', cursive;
   font-size: 3em;
   font-weight: bold;
-  margin: 0;
+  margin-top: 8px;
   word-spacing: 16px;
   background: rgb(6, 53, 85);
   -webkit-background-clip: text;
@@ -216,49 +217,64 @@ h3 {
   background-color: rgba(153, 30, 30, 0.5);
 }
 
-.nivel-1{
-  color: #017e1e;
-}
-
-.nivel-1:hover{
+.nivel-1 {
   color: white;
   background-color: #017e1e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.nivel-2{
-  color: #e0af0b;
+.nivel-1:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #017e1ea2;
 }
 
-.nivel-2:hover{
+.nivel-2 {
   color: white;
   background-color: #e0af0b;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.nivel-3{
-  color: #b90909;
+.nivel-2:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #e0ae0bc0;
 }
 
-.nivel-3:hover{
+.nivel-3 {
   color: white;
   background-color: #b90909;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.nivel-4{
-  color: #458bdb;
+.nivel-3:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #b909099f;
 }
 
-.nivel-4:hover{
+.nivel-4 {
   color: white;
   background-color: #458bdb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.nivel-5{
-  color: #7508a0;
+.nivel-4:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #458bdbbb;
 }
 
-.nivel-5:hover{
+.nivel-5 {
   color: white;
   background-color: #7508a0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.nivel-5:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #7508a0a4;
 }
 
 
@@ -267,7 +283,9 @@ h3 {
   .burger-menu {
       display: block;
   }
-
+  .burger-menu-bar {
+      display: block;
+  }
   .nav-bar ul {
       display: none;
   }

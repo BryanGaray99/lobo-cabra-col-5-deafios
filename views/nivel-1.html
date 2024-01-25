@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Teko:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link rel="stylesheet" href="/css/nivel-1.css">
@@ -15,30 +16,39 @@
     <link rel="stylesheet" href="/css/global.css">
 </head>
 <body onload="checkLoginStatus()">
+    <!-- Top Menu -->
+    <div class="burger-menu" onclick="toggleMobileMenu()">
+        <div class="burger-menu-bar"></div>
+        <div class="burger-menu-bar"></div>
+        <div class="burger-menu-bar"></div>
+    </div>
+    <ul id="desktop-menu">
+        <li><a href="#" class="nivel-1 active">Nivel 1</a></li>
+        <li><a href="/games/nivel-2/" class="nivel-2" >Nivel 2</a></li>
+        <li><a href="/games/nivel-3/" class="nivel-3">Nivel 3</a></li>
+        <li><a href="/games/nivel-4/" class="nivel-4">Nivel 4</a></li>
+        <li><a href="/games/nivel-5/" class="nivel-5">Nivel 5</a></li>
+        <li onclick="logout()">
+            <a href="#" id="login-btn">
+                Logout
+            </a>
+        </li>
+        <li><a href="/games">Return</a></li>
+    </ul>
+
     <div class="header">
-        <div class = "head">
-            <h2><span id="moveLeft">Lobo - Cabra - Col: </span> <span id="moveRight">5 Desafíos</span></h2>
-        </div>
-        <ul>
-            <li><a href="#" class="active nivel-1">Nivel 1</a></li>
-            <li><a href="/games/nivel-2/" class="nivel-2">Nivel 2</a></li>
-            <li><a href="/games/nivel-3/" class="nivel-3">Nivel 3</a></li>
-            <li><a href="/games/nivel-4/" class="nivel-4">Nivel 4</a></li>
-            <li><a href="/games/nivel-5/" class="nivel-5">Nivel 5</a></li>
-            <li onclick="logout()"><a href="#" id="login-btn">Logout</a></li>
-            <li><a href="/games">Return</a></li>
-        </ul>
+        <h2><span id="moveLeft">Lobo - Cabra - Col: </span> <span id="moveRight">5 Desafíos</span></h2>
     </div>
     <div class="container">
          <div class="game-screen">
             <div class="nivel1">
                 <div class="info">
                     <div class="score">
-                        Movimientos:
-                        <span class="score-number">0</span>
+                        Movimientos 
+                        <span class="score-number"> 0</span>
                     </div>
                     <div class="score">
-                        Tiempo:
+                        Tiempo
                         <span class="elapsed-time">00:00</span>
                     </div>
                 </div>
@@ -60,6 +70,7 @@
             <div class="game-board">
                 <div id="game">
                     <div id="dialog-short"></div>
+                    <div id="dialog-error"></div>                    
                     <div id="dialog-long"></div>                    
                     <div id="game">
                         <div id="sx">
@@ -102,6 +113,20 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" style="display: none;">
+        <a href="#" class="nivel-1">Nivel 1</a>
+        <a href="/games/nivel-2/" class="active nivel-2" >Nivel 2</a>
+        <a href="/games/nivel-3/" class="nivel-3">Nivel 3</a>
+        <a href="/games/nivel-4/" class="nivel-4">Nivel 4</a>
+        <a href="/games/nivel-5/" class="nivel-5">Nivel 5</a>
+        <a href="/games">Return</a>
+        <a id="mobile-sign-out" href="#" onclick="logout()">
+            <i class="fa fa-sign-out" style="font-size:16px"></i>
+            Cerrar Sesión
+        </a>
     </div>
     <script src="/scripts/nivel-1/nivel-1.js"></script>
 </body>

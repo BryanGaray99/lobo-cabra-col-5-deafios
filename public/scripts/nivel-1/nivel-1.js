@@ -14,10 +14,12 @@ const bgMusic = document.querySelector(".btn-bgm");
 let backgroundMusicEnabled;
 let backgroundMusic = document.getElementById("player");
 var dialogLong = document.getElementById('dialog-long');
+var dialogError = document.getElementById('dialog-error');
 var dialogShort = document.getElementById('dialog-short');
 var dialogDisplayedOneTime;
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
+
 
 var sides = ["sx", "dx"];
 var names = ["cabra", "lobo", "col"];
@@ -26,10 +28,40 @@ var space, lspace, turn = 0, timer, PC = true, PL = true, ZE = true;
 var conta = 0;
 let timerInterval;
 
-const gameWidth = 1536;
-const gameHeight = 730;
-space = (gameWidth - 325) / 2 - 200;
-lspace = space - 150;
+// const gameWidth = 1536/2;
+// const gameHeight = 730/2;
+// Obtiene el ancho de pantalla inicial y lo almacena si no existe en el almacenamiento local
+var storeScreenWidth = localStorage.getItem('screenWidth');
+if (!storeScreenWidth) {
+    storeScreenWidth = window.innerWidth;
+    localStorage.setItem('screenWidth', storeScreenWidth);
+}
+
+function screenValues() {
+    const currentScreenWidth = window.innerWidth;
+    // console.log(currentScreenWidth);
+
+    var factorScreen;
+    if (currentScreenWidth <= 650) {
+        factorScreen = 4;
+    } else if (currentScreenWidth <= 1250 && currentScreenWidth > 650) {
+        factorScreen = 2;
+    } else {
+        factorScreen = 1;
+    }
+
+    // Recalcula los valores usando el nuevo factorScreen
+    space = 405.5 / factorScreen;
+    lspace = space - (150 / factorScreen);
+
+    if (currentScreenWidth !== parseInt(storeScreenWidth)) {
+        // El tamaño de la pantalla ha cambiado
+        storeScreenWidth = currentScreenWidth;
+        localStorage.setItem('screenWidth', storeScreenWidth);
+
+        location.reload();
+    }
+}
 
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
@@ -38,7 +70,9 @@ const open = document.getElementById("open");
 const modal_Container = document.getElementById("modal_container");
 const close = document.getElementById("close");
 
-////////////////// Add Event Listeners //////////////////
+////////////////// Event Listeners //////////////////
+window.addEventListener('resize', screenValues);
+
 google.load("jquery", "1");
 
 open.addEventListener("click",() => {
@@ -89,13 +123,12 @@ function updateMoves() {
 //////////////// Lógica del juego ////////////////////
 function errore(t, tm) {
     window.clearTimeout(timer);
-    dialogLong.style.color = "rgb(202, 14, 14)";
-    dialogLong.style.lineHeight = "71px";
-    dialogLong.style.textAlign = "center";
-    $("#dialog-long").html(t).slideDown("fast", 
+    dialogError.style.color = "rgb(202, 14, 14)";
+    dialogError.style.textAlign = "center";
+    $("#dialog-error").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
-            $("#dialog-long").slideUp("fast");
+            $("#dialog-error").slideUp("fast");
         }, tm * 1000);
     });
 }
@@ -133,7 +166,7 @@ function checkVinto() {
         $("#zat").animate({ left: 0 }, "slow").append('<span class="inizia">Ganaste!</span>');
 
         vitoria("Buen trabajo, has ganado! Y has usado " + conta + " movimientos, en un tiempo de " + etime.textContent + 
-        ". En breve se reiniciará la página. " + "<a href='/review'>Gracias por jugar, deja tu review :)</a>", 7);
+        ". En breve se reiniciará la página. ", 7);
         $("#move-button").slideUp("fast");
 
         if(isLoggedIn){
@@ -297,7 +330,6 @@ function startMusic() {
 function toggleHelpDialog() {
     dialogLong.style.display = (dialogLong.style.display === 'block') ? 'none' : 'block';
     if (dialogLong.style.display === 'block') {
-        dialogLong.style.lineHeight = "40px";
         dialogLong.style.color = "#063555";
         dialogLong.style.textAlign = "left";
         dialogLong.innerHTML =             
@@ -323,12 +355,11 @@ function autoActivateDialog(hideAfterSeconds) {
 
     if (!dialogDisplayedOneTime){
         dialogLong.style.display = 'block';
-        dialogLong.style.lineHeight = "40px";
         dialogLong.style.color = "#063555";
         dialogLong.style.textAlign = "left";
         dialogLong.innerHTML =
             "Me cierro en 20 segundos!<br>" +             
-            "Si quieres volver a leer esto y más instrucciones da click en el botón [ (?) ]<br>" +
+            "Si quieres volver a leer esto y más instrucciones da click en [ (?) ]<br>" +
             "**********************************************************************************<br>" +
             "Nivel 1 - Condiciones:<br>" +
             "•	Se puede viajar sin pasajeros<br>" +
@@ -361,7 +392,6 @@ function init() {
     removeClick(1);
     startTimeStamp = new Date();
     startTimer();
-    updateMoves();
 }
 
 function logout(){
@@ -371,12 +401,20 @@ function logout(){
 
 startMusic();
 autoActivateDialog(20);
+screenValues();
+
+function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.style.display = (mobileMenu.style.display === 'flex') ? 'none' : 'flex';
+}
 
 /////leaderboard pop up///////////
 
 function checkLoginStatus(){
   if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
+    document.getElementById("mobile-sign-out").innerHTML = 
+        '<i class="fa fa-sign-out" style="font-size:16px"></i>' + " Login" ;
     isLoggedIn = false;
   }
 }

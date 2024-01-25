@@ -85,15 +85,12 @@ app.get('/games/nivel-3', (req, res) => res.render('nivel-3.html'));
 app.get('/games/nivel-4', (req, res) => res.render('nivel-4.html'));
 app.get('/games/nivel-5', (req, res) => res.render('nivel-5.html'));
 
-app.get('/games/flappy-bird', (req, res) => res.render('flappy-bird.html'));
-app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
-
 app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
 app.get('/gamerProfile', (req, res) => res.render('gamerProfile.html'));
 app.get('/editProfile', (req, res) => res.render('editProfile.html'));
 app.get('/review', (req, res) => res.render('review.html'));
-
+app.get('*', (req, res) => res.render('404.html'));
 
 let refreshTokens = []
 

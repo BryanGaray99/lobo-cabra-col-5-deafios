@@ -21,7 +21,7 @@ function checkAndUnlockLevels() {
     } else {
         textContainer1.classList.add("locked");
         text1.innerHTML =
-            "Aquí puedes ver tu mejor resulta: Menor cantidad de movimientos y menor tiempo realizado en el nivel"
+            "Aquí puedes ver tu mejor resultado: Menor cantidad de movimientos y menor tiempo realizado en el nivel"
     }
 
     // Nivel 2
@@ -176,5 +176,15 @@ function checkLoginStatus(){
         const ign = JSON.parse(window.atob(localStorage.getItem("JWT").split('.')[1])).ign;
         document.getElementById("hellomsg").innerHTML = "Bienvenido, " + ign;
         getProfile();
+    }
+}
+
+window.addEventListener('resize', checkScreenWidth);
+function checkScreenWidth(){
+    // Check if element is on the dom
+    if (document.getElementById("mobile-menu")) {
+        if(window.innerWidth < 600){
+            document.getElementById("mobile-menu").style.display = "none";
+        }
     }
 }

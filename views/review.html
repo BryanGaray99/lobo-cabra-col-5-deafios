@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/css/review.css">
         <script src="/scripts/global/global.js"></script>
     </head>
-    <body>
+    <body onload="checkLoginStatus()">
         <div class="exit"><a href="/games">&times;</a></div>
         <div id="panel" class="panel-container">
             <strong>¿Cómo calificarías tu experiencia con el juego?</strong>
@@ -40,7 +40,10 @@
               </div>
             </div>
             <button class="btn" id="send">Enviar Feedback</button>
-          </div>
-          <script src="/scripts/homepage/review.js"></script>
+        </div>
+        <div id="not-logged-pannel" class="not-logged-panel">
+          <strong>Para dejar un review, por favor <a href="/login">accede</a> con tu usuario y contraseña</strong>
+        </div>
+        <script src="/scripts/homepage/review.js"></script>
     </body>
 </html>
