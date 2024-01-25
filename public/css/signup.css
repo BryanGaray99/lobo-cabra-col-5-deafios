@@ -26,7 +26,6 @@ body {
 /*<========CSS Reset Properties========>*/
 h1, p, form, input, div, img, label {
 	padding: 0;
-	margin: 0;
 }
 a {
 	text-decoration: none;
@@ -42,18 +41,15 @@ a {
 }
 #signupForm {
 	margin: 1em auto 0 auto;
-	width: 300px;
 	border: 10px solid rgba(6, 53, 85, 0.747);
 	border-radius: 15px;
-	padding: 30px;
-	width: 320px;
-	height: 440px;
-
+	padding: 12px 20px 4px 20px;
+	width: 24em;
 }
 #verify-email{
 	display: none;
 	text-align: center;
-	font-size: 28px;
+	font-size: 1.5em;
 	padding-top: 170px;
     color: rgb(6, 53, 85);
 	font-weight: bold;
@@ -73,10 +69,11 @@ header h1 {
     color: rgb(6, 53, 85);
 	font-family: 'Bungee Shade', cursive;;
 	font-weight: bold;
-	font-size: 6em;
+	font-size: 4em;
 	font-variant: small-caps;
 	line-height: 1.5;
 	padding: 0.2em 0 0 0;
+	margin: 0;
 	height: 1.5em;
 	width: 100%;
 	text-align: center;
@@ -88,7 +85,7 @@ header h2 {
     color: rgb(6, 53, 85);
 	font-family: 'Bungee Shade', cursive;;
 	font-weight: bold;
-	font-size: 4em;
+	font-size: 3em;
 	font-variant: small-caps;
 	line-height: 0.5;
 	height: 1.5em;
@@ -103,10 +100,10 @@ header h3 {
 	font-family: 'Cinzel Decorative';
     color: rgb(6, 53, 85);
 	font-weight: bold;
-	font-size: 32px;
+	font-size: 2em;
+	margin: 0.5em 0 0.5em 0;
 	font-variant: small-caps;
 	line-height: 0.1;
-	height: 0.5em;
 	width: 100%;
 	text-align: center;
 
@@ -118,9 +115,9 @@ input {
 	border: none;
 	color: rgba(80,80,80,1);
 	border-radius: 10px;
-	padding: 0 0 0 4em;
+	padding: 0 0 0 2em;
 	margin: 0 0 1em 0;
-	width: 20em;
+	width: 90%;
 	height: 2.8em;
 	outline: none;
 	-webkit-transition: background-color 0.4s;
@@ -188,9 +185,9 @@ input:focus {
 .account-exists{
 	font-size: 18px;
 	text-align: center;
-	padding-top: 25px;
+	padding-top: 15px;
 	color: rgb(0, 0, 0);
-	margin-bottom: 5px;
+	padding-bottom: 25px;
 }
 
 .redirect{
@@ -206,9 +203,9 @@ input:focus {
 
 .err-message{
 	text-align: center;
-	color: rgb(25, 77, 155);
+	color: rgb(155, 25, 25);
 	font-size: 20px;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 @-webkit-keyframes track-in {
@@ -238,12 +235,33 @@ input:focus {
 
 /*<============================================================>*/
 /*<========Media queries for other displays and devices========>*/
-@media only screen and (max-width: 480px) {
-	header h1 {
-		font-size: 4em;
+/* Media queries */
+@media only screen and (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+	header h2 {
+        font-size: 1.5em;
+    }
+	header h3 {
+        font-size: 1.5em;
+    }
+
+    #signupForm {
+        margin: 0.5em auto 0 auto;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+	#signupForm {
+		width: 15em;
+		align-items: center;
 	}
-	.loginForm {
-		margin: 0.5em auto 0 auto;
+	.input {
+		padding: 0 0 0 0;
+	}
+	.submit {
+		margin: 0 0 0 0;
+		width: 100%;
 	}
 }
-/*<============================================================>*/

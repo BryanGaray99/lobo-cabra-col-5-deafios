@@ -26,7 +26,6 @@ body {
 /*<========CSS Reset Properties========>*/
 h1, p, form, input, div, img, label {
 	padding: 0;
-	margin: 0;
 }
 a {
 	text-decoration: none;
@@ -42,7 +41,6 @@ a {
 }
 .loginForm {
 	margin: 1em auto 0 auto;
-	width: 300px;
 	border: 10px solid rgba(6, 53, 85, 0.747);
 	border-radius: 15px;
 	padding: 20px;
@@ -53,10 +51,11 @@ header h1 {
     color: rgb(6, 53, 85);
 	font-family: 'Bungee Shade', cursive;
 	font-weight: bold;
-	font-size: 6em;
+	font-size: 4em;
 	font-variant: small-caps;
 	line-height: 1.5;
 	padding: 0.2em 0 0 0;
+	margin: 0;
 	height: 1.5em;
 	width: 100%;
 	text-align: center;
@@ -68,7 +67,7 @@ header h2 {
     color: rgb(6, 53, 85);
 	font-family: 'Bungee Shade', cursive;;
 	font-weight: bold;
-	font-size: 4em;
+	font-size: 3em;
 	font-variant: small-caps;
 	line-height: 0.5;
 	height: 1.5em;
@@ -83,7 +82,7 @@ header h3 {
     color: rgb(6, 53, 85);
 	font-family: 'Cinzel Decorative';
 	font-weight: bold;
-	font-size: 32px;
+	font-size: 1.8em;
 	font-variant: small-caps;
 	line-height: 0.5;
 	padding: 0.2em 0 0 0;
@@ -101,7 +100,7 @@ input {
 	border-radius: 10px;
 	padding: 0 0 0 4em;
 	margin: 0 0 1em 0;
-	width: 20em;
+	width: 80%;
 	height: 2.8em;
 	outline: none;
 	-webkit-transition: background-color 0.4s;
@@ -317,3 +316,40 @@ input:focus {
       opacity: 1;
     }
   }
+
+/* Media queries */
+@media only screen and (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+	header h2 {
+        font-size: 1.5em;
+    }
+
+    .loginForm {
+        margin: 0.5em auto 0 auto;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+	.loginForm {
+		width: 18em;
+	}
+	.login-signup {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.submit {
+		margin: 0 0 1em 0;
+		width: 80%;
+	}
+	.submit1 {
+		margin: 0;
+		width: 80%;
+	}
+	#dashboard {
+		margin-top: 2em;	
+	}
+}

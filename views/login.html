@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
-	<title>Login</title>
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Cinzel Decorative">
-	<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/login.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Cinzel Decorative">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 
 <body>
-	<div class="container">
-		<header><h1>Lobo - Cabra - Col</h1><h2>5 Desafíos</h2><h3>By Bryan Garay</h3></header>
-		<div class="loginForm">
-			<form id="login-form">
-				<input id="ign" class="ign" type="text" name="ign" placeholder="Ingrese su nombre de Usuario" autocomplete="off" required><br>
-				<input id="password" class="password" type="password" name="password" placeholder="Ingrese su Contraseña" autocomplete="off" required><br>
-				<div class="err-message"><span id="err-message"></span></div> <br>
-				<div class="login-signup">
-					<input id="submit" class="submit" type="submit" name="submit" value="Ingresar">
-					<input id="signup" class="submit1" type="button" name="signup" value="Registrarse" onclick="location.href = '/signup'">
-				</div>
-			</form>
-			<!-- <a class="recovery" href="#">Forgot Password&#63;</a> -->
-		</div>
-	</div>
-	<div class="games-dashboard">
-		<input id="dashboard" class="submit1" type="button" name="submit" value="Ingresar como invitado" onclick="skipToDashboard()">
-	</div>
+    <div class="container">
+        <header>
+            <h1>Lobo - Cabra - Col</h1> 
+            <h2>5 Desafíos</h2> 
+            <h3>By Bryan Garay</h3>
+        </header>
+        <div class="loginForm">
+            <form id="login-form">
+                <input id="ign" class="ign" type="text" name="ign" placeholder="Ingrese su nombre de Usuario" autocomplete="off" required><br>
+                <input id="password" class="password" type="password" name="password" placeholder="Ingrese su Contraseña" autocomplete="off" required><br>
+                <div class="err-message"><span id="err-message"></span></div> <br>
+                <div class="login-signup">
+                    <input id="submit" class="submit" type="submit" name="submit" value="Ingresar">
+                    <input id="signup" class="submit1" type="button" name="signup" value="Registrarse" onclick="location.href = '/signup'">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="games-dashboard">
+        <input id="dashboard" class="submit1" type="button" name="submit" value="Ingresar como invitado" onclick="skipToDashboard()">
+    </div>
 
-	<div id="modal_container" class="modal-container">
+    <div id="modal_container" class="modal-container">
         <div class="modal">
             <button id="close" class="close">&times;</button>
             <h1>Lobo - Cabra - Col: 5 desafíos</h1>
-			<br>
-			<br>
-            <p style="width: 395px;">Tu progreso actual <span style="color: red;">no se guardará</span> a menos de que ingreses con tu usuario y contraseña. Te gustaría continuar ?</p>
-			<br><br><br>
+            <p>Tu progreso no se guardará si ingresas como invitado. ¿Deseas continuar?</p>
             <button id="Yes">Si</button>
             <button id="No">No</button>
         </div>
     </div>
-	<script type="text/javascript" src="/scripts/login/login.js"></script>
+    <script type="text/javascript" src="/scripts/login/login.js"></script>
 </body>
 
 </html>
