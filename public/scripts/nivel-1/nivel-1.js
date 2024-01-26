@@ -394,11 +394,6 @@ function init() {
     startTimer();
 }
 
-function logout(){
-  isLoggedIn = false;
-  userLogout();
-}
-
 startMusic();
 autoActivateDialog(20);
 screenValues();
@@ -408,16 +403,7 @@ function toggleMobileMenu() {
     mobileMenu.style.display = (mobileMenu.style.display === 'flex') ? 'none' : 'flex';
 }
 
-/////leaderboard pop up///////////
-
-function checkLoginStatus(){
-  if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
-    document.getElementById("login-btn").innerHTML = "Login";
-    document.getElementById("mobile-sign-out").innerHTML = 
-        '<i class="fa fa-sign-out" style="font-size:16px"></i>' + " Login" ;
-    isLoggedIn = false;
-  }
-}
+/////leaderboard pop up//////////
 
 const scoresList = document.getElementsByClassName("members-with-score")[0];
 
@@ -429,3 +415,20 @@ async function getScores(){
     scoresList.innerHTML = '<div class="not-logged-in"><span>Porfavor <a href="/login">registrate</a> para guardar tu puntuación.</span></div>';
   }
 }
+
+
+// Login/logout
+function logout(){
+    isLoggedIn = false;
+    userLogout();
+  }
+  
+
+function checkLoginStatus(){
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+      document.getElementById("login-btn").innerHTML = "Login";
+      document.getElementById("mobile-sign-out").innerHTML = 
+          '<i class="fa fa-sign-out" style="font-size:16px"></i>' + " Login" ;
+      isLoggedIn = false;
+    }
+  }

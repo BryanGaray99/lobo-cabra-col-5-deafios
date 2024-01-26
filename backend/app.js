@@ -89,7 +89,6 @@ app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
 app.get('/editProfile', (req, res) => res.render('editProfile.html'));
 app.get('/review', (req, res) => res.render('review.html'));
-app.get('*', (req, res) => res.render('404.html'));
 
 let refreshTokens = []
 
@@ -121,7 +120,7 @@ const sendEmail = (email, ign, verifyUniqueString) => {
 		html: `
 				<h2>Hola ${ign}, </h2>
 				<h4> Gracias por registrarte en Lobo Cabra Col: 5 Desafios. </h4>
-				<h4>Haz click <a href=https://bg-lcc-game.onrender.com/api/verify/${verifyUniqueString}> aquí </a> para confirmar tu correo.</h4>
+				<h4>Haz click <a href=http://localhost:4000/api/verify/${verifyUniqueString}> aquí </a> para confirmar tu correo.</h4>
 				`
 	}
 	transport.sendMail(mailOptions, function(error, response) {
@@ -415,6 +414,8 @@ app.post('/api/reviews', authenticateToken, async (req, res) => {
     return res.status(500).json({ error: 'Error interno del servidor.' });
   }
 });
+
+app.get('*', (req, res) => res.render('404.html'));
 
 app.listen(
 	process.env.PORT || port,
