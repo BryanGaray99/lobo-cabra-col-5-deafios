@@ -92,6 +92,7 @@ a:hover {
   top: 43px;
   right: 0;
   width: 100%;
+  z-index: 1010;
 }
 
 .mobile-menu a {

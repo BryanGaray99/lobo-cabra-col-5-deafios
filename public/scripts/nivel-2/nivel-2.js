@@ -427,7 +427,6 @@ function init() {
 
 startMusic();
 autoActivateDialog(20);
-
 screenValues();
 
 function toggleMobileMenu() {

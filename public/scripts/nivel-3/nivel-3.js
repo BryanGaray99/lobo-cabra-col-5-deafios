@@ -14,6 +14,7 @@ const bgMusic = document.querySelector(".btn-bgm");
 let backgroundMusicEnabled;
 let backgroundMusic = document.getElementById("player");
 var dialogLong = document.getElementById('dialog-long');
+var dialogError = document.getElementById('dialog-error');
 var dialogShort = document.getElementById('dialog-short');
 var dialogDisplayedOneTime;
 var modal = document.querySelector("#myModal");
@@ -28,11 +29,45 @@ var boat = document.getElementById("zat");
 var conta = 0;
 let timerInterval;
 
-const gameWidth = 1536;
-const gameHeight = 730;
-space = (gameWidth - 325) / 2 - 200;
-lspace = 240 - space;
-rspace = space - 210;
+// const gameWidth = 1536;
+// const gameHeight = 730;
+// lspace = 240 - space;
+// rspace = space - 210;
+
+// Obtiene el ancho de pantalla inicial y lo almacena si no existe en el almacenamiento local
+var storeScreenWidth = localStorage.getItem('screenWidth');
+if (!storeScreenWidth) {
+    storeScreenWidth = window.innerWidth;
+    localStorage.setItem('screenWidth', storeScreenWidth);
+}
+
+function screenValues() {
+    const currentScreenWidth = window.innerWidth;
+    // console.log(currentScreenWidth);
+
+    var factorScreen;
+    if (currentScreenWidth <= 650) {
+        factorScreen = 4;
+    } else if (currentScreenWidth <= 1250 && currentScreenWidth > 650) {
+        factorScreen = 2;
+    } else {
+        factorScreen = 1;
+    }
+
+    space = 405.5 / factorScreen;
+    // Recalcula los valores usando el nuevo factorScreen
+    lspace = -165.5 / factorScreen;
+    rspace = 195.5 / factorScreen;
+
+    if (currentScreenWidth !== parseInt(storeScreenWidth)) {
+        // El tamaño de la pantalla ha cambiado
+        storeScreenWidth = currentScreenWidth;
+        localStorage.setItem('screenWidth', storeScreenWidth);
+
+        location.reload();
+    }
+}
+
 
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
@@ -42,6 +77,10 @@ const modal_Container = document.getElementById("modal_container");
 const close = document.getElementById("close");
 
 ////////////////// Add Event Listeners //////////////////
+google.load("jquery", "1");
+
+window.addEventListener('resize', screenValues);
+
 open.addEventListener("click",() => {
     modal_Container.classList.add("show");
 });
@@ -90,13 +129,12 @@ function updateMoves() {
 //////////////// Lógica del juego ////////////////////
 function errore(t, tm) {
     window.clearTimeout(timer);
-    dialogLong.style.color = "rgb(202, 14, 14)";
-    dialogLong.style.textAlign = "center";
-    dialogLong.style.lineHeight = "71px";
-    $("#dialog-long").html(t).slideDown("fast", 
+    dialogError.style.color = "rgb(202, 14, 14)";
+    dialogError.style.textAlign = "center";
+    $("#dialog-error").html(t).slideDown("fast", 
     function() {
         timer = window.setTimeout(function() {
-            $("#dialog-long").slideUp("fast");
+            $("#dialog-error").slideUp("fast");
         }, tm * 1000);
     });
 }
@@ -312,7 +350,6 @@ function toggleHelpDialog() {
     dialogLong.style.display = (dialogLong.style.display === 'block') ? 'none' : 'block';
     if (dialogLong.style.display === 'block') {
         dialogLong.style.color = "#063555";
-        dialogLong.style.lineHeight = "40px";
         dialogLong.style.textAlign = "left";
         dialogLong.innerHTML =             
             "**********************************************************************************<br>" +
@@ -338,7 +375,6 @@ function autoActivateDialog(hideAfterSeconds) {
     if (!dialogDisplayedOneTime){
         dialogLong.style.display = 'block';
         dialogLong.style.color = "#063555";
-        dialogLong.style.lineHeight = "40px";
         dialogLong.style.textAlign = "left";
         dialogLong.innerHTML =
             "Me cierro en 20 segundos!<br>" +             
@@ -381,6 +417,12 @@ function init() {
 
 startMusic();
 autoActivateDialog(20);
+screenValues();
+
+function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.style.display = (mobileMenu.style.display === 'flex') ? 'none' : 'flex';
+}
 
 /////leaderboard pop up///////////
 
@@ -404,7 +446,6 @@ function blockedLevel3() {
         boat.style.pointerEvents = "none";
         dialogLong.style.display = 'block';
         dialogLong.style.color = "rgb(202, 14, 14)";
-        dialogLong.style.lineHeight = "40px";
         dialogLong.style.textAlign = "center";
         dialogLong.style.backgroundSize = "contain";
         dialogLong.style.backgroundPosition = "center center";
@@ -438,6 +479,8 @@ function checkLoginStatus3(){
     blockedLevel3();
     if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
       document.getElementById("login-btn").innerHTML = "Login";
+      document.getElementById("mobile-sign-out").innerHTML = 
+          '<i class="fa fa-sign-out" style="font-size:16px"></i>' + " Login" ;      
       isLoggedIn = false;
     } 
 }

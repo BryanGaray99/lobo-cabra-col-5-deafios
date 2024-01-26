@@ -92,6 +92,7 @@ a:hover {
   top: 43px;
   right: 0;
   width: 100%;
+  z-index: 1010;
 }
 
 .mobile-menu a {
@@ -688,6 +689,13 @@ img {
 }
 
 @media screen and (max-width: 650px) {
+  h2{
+    margin: 20px auto;
+  }
+  .game-screen {
+    bottom: 0;
+  }
+  
   .game-board {
     width: calc(1200px / 4);
     height: calc(600px / 4);
